@@ -1,0 +1,121 @@
+﻿*** Begin Patch
+*** Update File: C:\Users\59809\Documents\关键矿产\mineral-control-atlas\app.js
+@@
+@@
+  document.getElementById("breadcrumb").textContent = `关键矿产情报采集分析系统 / ${route==="export-controls"?"关键矿产清单":modules[route].title}`;
+}
++
++// === Smart Q&A ===
++const smartQaState={messages:[],sources:{policy:true,intelligence:true,market:true,library:true,announcement:true}};
++const smartQaQuickQuestions=[
++  {q:"当前有哪些出口管制政策？",desc:"查看现行管制政策"},
++  {q:"镓和锗的管制范围与要求",desc:"稀散金属管制"},
++  {q:"美国关键矿产政策动向",desc:"国别态势"},
++  {q:"近期管制政策有哪些变化？",desc:"政策动态"},
++  {q:"锑的出口态势与价格",desc:"市场与出口"}
++];
++function renderSmartQaPage(){
++  var msgs=smartQaState.messages;
++  var chatHtml=msgs.length===0?'<div class="qa-empty-state"><span>⚡</span><p>选择数据源、输入问题或点击快捷问法开始</p></div>':msgs.map(function(m){return m.role==="user"?('<div class="qa-message qa-user"><div class="qa-avatar">U</div><div class="qa-bubble">'+m.text+'</div></div>'):('<div class="qa-message qa-assistant"><div class="qa-avatar">AI</div><div class="qa-bubble">'+m.text+'</div>'+(m.sources&&m.sources.length?'<div class="qa-sources">'+m.sources.map(function(s){return'<a href="'+escapeT(s.url)+'" target="_blank" rel="noreferrer">'+escapeT(s.label)+'</a>';}).join("")+'</div>':"")+'</div>');}).join("");
++  root.innerHTML='<div class="page smart-qa-page">'+
++    '<header class="page-heading"><div>'+
++      '<p class="page-kicker">SOURCE-GROUNDED Q&amp;A</p>'+
++      '<h1>智能问答</h1>'+
++      '<p>基于文件库、政策、情报快照、市场数据和公告税号进行带来源依据的问答。</p>'+
++    '</div></header>'+
++    '<section class="qa-sources-bar">'+
++      '<span>数据源：</span>'+
++      '<button class="qa-source-chip '+(!smartQaState.sources.policy?'"':'" active"')+' data-qa-source="policy">📋 政策管制</button>'+
++      '<button class="qa-source-chip '+(!smartQaState.sources.intelligence?'"':'" active"')+' data-qa-source="intelligence">🔍 情报快照</button>'+
++      '<button class="qa-source-chip '+(!smartQaState.sources.market?'"':'" active"')+' data-qa-source="market">📊 市场数据</button>'+
++      '<button class="qa-source-chip '+(!smartQaState.sources.library?'"':'" active"')+' data-qa-source="library">📁 文件库</button>'+
++      '<button class="qa-source-chip '+(!smartQaState.sources.announcement?'"':'" active"')+' data-qa-source="announcement">🏷️ 公告税号</button>'+
++    '</section>'+
++    '<section class="qa-quick-questions">'+
++      smartQaQuickQuestions.map(function(q){return'<button class="qa-quick-btn" data-qa-quick="'+escapeT(q.q)+'"><span>'+escapeT(q.q)+'</span><small>'+escapeT(q.desc)+'</small></button>';}).join("")+
++    '</section>'+
++    '<section class="qa-chat-area" id="qaChatArea">'+chatHtml+'</section>'+
++    '<div class="qa-input-bar">'+
++      '<input id="qaInput" type="text" placeholder="输入关于关键矿产管制、政策或市场的问题..." />'+
++      '<button id="qaSendBtn" type="button">发送</button>'+
++    '</div></div>';
++  document.getElementById("qaSendBtn").addEventListener("click",function(){var q=document.getElementById("qaInput").value.trim();if(!q)return;document.getElementById("qaInput").value="";handleSmartQaQuestion(q);});
++  document.getElementById("qaInput").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();document.getElementById("qaSendBtn").click();}});
++  document.querySelectorAll(".qa-source-chip").forEach(function(btn){btn.addEventListener("click",function(){var k=this.dataset.qaSource;smartQaState.sources[k]=!smartQaState.sources[k];this.classList.toggle("active");});});
++  document.querySelectorAll(".qa-quick-btn").forEach(function(btn){btn.addEventListener("click",function(){handleSmartQaQuestion(this.dataset.qaQuick);});});
++  var chatA=document.getElementById("qaChatArea");if(chatA)chatA.scrollTop=chatA.scrollHeight;
++}
++function handleSmartQaQuestion(q){
++  smartQaState.messages.push({role:"user",text:q});
++  var results=smartQaSearch(q),answer=smartQaBuildAnswer(q,results);
++  smartQaState.messages.push(answer);
++  renderSmartQaMessages();
++}
++function renderSmartQaMessages(){
++  var ca=document.getElementById("qaChatArea");
++  if(!ca){renderSmartQaPage();return;}
++  var msgs=smartQaState.messages;
++  ca.innerHTML=msgs.map(function(m){
++    if(m.role==="user") return '<div class="qa-message qa-user"><div class="qa-avatar">U</div><div class="qa-bubble">'+m.text+'</div></div>';
++    var html='<div class="qa-message qa-assistant"><div class="qa-avatar">AI</div><div class="qa-bubble">'+m.text+'</div>';
++    if(m.sources&&m.sources.length) html+='<div class="qa-sources">'+m.sources.map(function(s){return'<a href="'+escapeT(s.url)+'" target="_blank" rel="noreferrer" class="qa-source-link">'+escapeT(s.label)+'</a>';}).join("")+'</div>';
++    return html+'</div>';
++  }).join("");
++  ca.scrollTop=ca.scrollHeight;
++}
++function smartQaSearch(query){
++  var q=query.toLowerCase(),results=[],active=smartQaState.sources;
++  var keywords=q.split(/[\s,，。、？?！!；;：:\n]+/).filter(function(k){return k.length>=2;});
++  if(keywords.length===0) return results;
++  if(active.policy) for(var i=0;i<policies.length;i++){
++    var p=policies[i],text=[p.name,p.symbol,p.type,p.scopeShort,p.scope,p.method,p.source,p.policyGroup].join(" ").toLowerCase(),score=0;
++    for(var j=0;j<keywords.length;j++){if(text.indexOf(keywords[j])>=0) score++;}
++    if(score>0) results.push({score:score,source:"policy",title:p.name+"（"+p.symbol+"）",body:p.scopeShort,detail:p.scope,date:p.date,url:p.url,sourceLabel:p.source});
++  }
++  if(active.intelligence&&typeof intelligenceSnapshots!=="undefined") for(var i=0;i<intelligenceSnapshots.length;i++){
++    var s=intelligenceSnapshots[i],text=[s.titleZh,s.summaryZh].concat(s.factsZh||[]).concat((s.sectionsZh||[]).map(function(x){return x.title+" "+x.body;})).join(" ").toLowerCase(),score=0;
++    for(var j=0;j<keywords.length;j++){if(text.indexOf(keywords[j])>=0) score++;}
++    if(score>0) results.push({score:score,source:"intelligence",title:s.titleZh,body:s.summaryZh,date:s.sourcePublished,url:s.sourceUrl,sourceLabel:s.sourceName});
++  }
++  if(active.market) for(var i=0;i<mineralMarketData.length;i++){
++    var m=mineralMarketData[i],text=[m.name,m.symbol,m.type,m.product].join(" ").toLowerCase(),score=0;
++    for(var j=0;j<keywords.length;j++){if(text.indexOf(keywords[j])>=0) score++;}
++    if(score>0) results.push({score:score,source:"market",title:m.name+"（"+m.symbol+"）",body:m.product+" · 价格 "+m.price+" "+m.unit,detail:"出口量指数: "+(m.exports||[]).join(" → ")+" · 价格变动: "+(m.change>0?"+":"")+m.change+"%",date:"",url:"#/minerals",sourceLabel:"市场数据"});
++  }
++  if(active.library&&typeof importedLibraryIndex!=="undefined") for(var i=0;i<importedLibraryIndex.length;i++){
++    var lib=importedLibraryIndex[i],text=[lib.name,lib.typeName,lib.category,lib.mineral,lib.content||""].join(" ").toLowerCase(),score=0;
++    for(var j=0;j<keywords.length;j++){if(text.indexOf(keywords[j])>=0) score++;}
++    if(score>0) results.push({score:score,source:"library",title:lib.name,body:lib.typeName+(lib.category?" · "+lib.category:""),detail:lib.mineral?"涉及矿产："+lib.mineral:"",date:lib.date,url:lib.downloadUrl||"#/countries",sourceLabel:lib.sourceName});
++  }
++  if(active.announcement&&typeof announcementDefinitions!=="undefined") for(var i=0;i<announcementDefinitions.length;i++){
++    var ann=announcementDefinitions[i],text=[ann.notice].concat((ann.items||[]).reduce(function(a,b){return a.concat(b);},[])).join(" ").toLowerCase(),score=0;
++    for(var j=0;j<keywords.length;j++){if(text.indexOf(keywords[j])>=0) score++;}
++    if(score>0) results.push({score:score,source:"announcement",title:ann.notice,body:(ann.items?ann.items.length:0)+" 项物项 · "+ann.statusText,detail:(ann.items||[]).slice(0,3).map(function(x){return x[0];}).join("、")+((ann.items||[]).length>3?"…":""),date:ann.date,url:ann.source,sourceLabel:"公告税号"});
++  }
++  results.sort(function(a,b){return b.score-a.score;});
++  return results.slice(0,12);
++}
++function smartQaBuildAnswer(question,results){
++  if(results.length===0) return {role:"assistant",text:'<p>未能在所选数据源中找到与「<strong>'+escapeT(question)+'</strong>」相关的结果。建议尝试：</p><ul style="margin-top:8px;padding-left:20px"><li>调整关键词或使用更简洁的问法</li><li>切换或扩大数据源范围</li><li>查看 <a href="#/export-controls" style="color:var(--green)">关键矿产清单</a> 或 <a href="#/intelligence-analysis" style="color:var(--green)">开源情报</a> 页面</li></ul>',sources:[]};
++  var bySource={};
++  for(var i=0;i<results.length;i++){var r=results[i];if(!bySource[r.source])bySource[r.source]=[];bySource[r.source].push(r);}
++  var sLabels={policy:"政策管制",intelligence:"情报快照",market:"市场数据",library:"文件库",announcement:"公告税号"},sIcons={policy:"📋",intelligence:"🔍",market:"📊",library:"📁",announcement:"🏷️"};
++  var sectionsHtml="",sources=[],keys=Object.keys(bySource);
++  for(var si=0;si<keys.length;si++){
++    var key=keys[si],items=bySource[key],label=sLabels[key]||key,icon=sIcons[key]||"📄";
++    sectionsHtml+='<div class="qa-result-group"><h4>'+icon+' '+label+'（'+items.length+' 条）</h4>';
++    for(var ii=0;ii<Math.min(items.length,4);ii++){
++      var item=items[ii],dLines=[];
++      if(item.detail) dLines.push(item.detail);
++      if(item.date) dLines.push("发布日期："+item.date);
++      sectionsHtml+='<div class="qa-result-item"><a href="'+escapeT(item.url)+'" target="_blank" rel="noreferrer" class="qa-result-title">'+escapeT(item.title)+'</a><p>'+escapeT(item.body)+'</p>'+(dLines.length?'<small>'+dLines.join(" · ")+'</small>':"")+'<span class="qa-result-badge">'+escapeT(item.sourceLabel||label)+'</span></div>';
++      sources.push({label:item.title,url:item.url});
++    }
++    sectionsHtml+="</div>";
++  }
++  return {role:"assistant",text:'<div class="qa-answer"><p class="qa-answer-summary">根据所选数据源，找到 <strong>'+results.length+'</strong> 条相关内容：</p>'+sectionsHtml+'</div>',sources:sources};
++}
++function escapeT(s){if(typeof s!=="string")return"";return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
++
+  function render(){
+*** End Patch

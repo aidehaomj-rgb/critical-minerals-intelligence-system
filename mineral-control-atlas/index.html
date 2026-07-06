@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="关键矿产情报采集分析系统" />
+    <title>关键矿产情报采集分析系统</title>
+  <link rel="stylesheet" href="./styles.css?v=20260705-vibrant-modules-v2" />
+  <link rel="stylesheet" href="./visual-recovery.css?v=20260705-vibrant-modules-v2" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <a class="logo" href="#/export-controls" aria-label="关键矿产情报采集分析系统首页">
+          <span class="logo-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="logo-copy">
+            <strong><span>关键矿产情报</span><span>采集分析系统</span></strong>
+            <small>CRITICAL MINERALS INTELLIGENCE</small>
+          </span>
+        </a>
+
+        <nav class="side-nav" aria-label="主导航">
+          <p class="nav-section-label">情报工作台</p>
+          <a href="#/overview" data-route="overview">
+            <span class="nav-icon">◫</span><span>情报总览</span>
+          </a>
+          <a href="#/export-controls" data-route="export-controls">
+            <span class="nav-icon">◆</span><span>关键矿产清单</span>
+          </a>
+          <a href="#/minerals" data-route="minerals">
+            <span class="nav-icon">●</span><span>关键矿产态势</span>
+          </a>
+          <a href="#/intelligence-analysis" data-route="intelligence-analysis">
+            <span class="nav-icon">◉</span><span>开源信息情报</span>
+          </a>
+          <a href="#/countries" data-route="countries">
+            <span class="nav-icon">▣</span><span>文件库</span>
+          </a>
+
+          <p class="nav-section-label">战术-研究工具</p>
+          <a href="#/timeline" data-route="timeline">
+            <span class="nav-icon">◫</span><span>政策时间轴</span>
+          </a>
+          <a href="#/smart-qa" data-route="smart-qa">
+            <span class="nav-icon">◉</span><span>智能问答</span>
+          </a>
+          <a href="#/relationship-graph" data-route="relationship-graph">
+            <span class="nav-icon">◇</span><span>关系图谱分析</span>
+          </a>
+          <a href="#/supply-chain-path" data-route="supply-chain-path">
+            <span class="nav-icon">⇄</span><span>供应链路径分析</span>
+          </a>
+          <a href="#/ai-analysis" data-route="ai-analysis">
+            <span class="nav-icon">✦</span><span>AI智能分析</span>
+          </a>
+
+          <p class="nav-section-label">战略-报告生成</p>
+          <a href="#/ai-deep-research" data-route="ai-deep-research">
+            <span class="nav-icon">◈</span><span>AI深度研究</span>
+          </a>
+          <a href="#/ai-report" data-route="ai-report">
+            <span class="nav-icon">▤</span><span>AI战略报告</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-foot">
+          <div class="data-status">
+            <span class="status-light"></span>
+            <div><strong>数据已同步</strong><small>截至 2026.07.02</small></div>
+          </div>
+          <a href="#/settings" data-route="settings">
+            <span class="nav-icon">⚙</span><span>系统设置</span>
+          </a>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="menu-button" id="menuButton" type="button" aria-label="打开导航">☰</button>
+            <div>
+              <p id="breadcrumb">关键矿产情报采集分析系统 / 关键矿产清单</p>
+              <span>下午好，当前收录 <strong>11</strong> 组管制政策</span>
+            </div>
+          </div>
+          <div class="topbar-actions">
+            <button class="global-search" id="globalSearch" type="button">
+              <span>⌕</span><span>搜索情报、矿产、公告</span><kbd>⌘ K</kbd>
+            </button>
+            <button class="icon-button" type="button" aria-label="通知">●<i></i></button>
+            <div class="avatar">MS</div>
+          </div>
+        </header>
+
+        <main id="pageRoot" tabindex="-1"></main>
+      </div>
+    </div>
+
+    <dialog class="detail-dialog" id="detailDialog">
+      <button class="dialog-close" id="dialogClose" type="button" aria-label="关闭">×</button>
+      <div id="dialogContent"></div>
+    </dialog>
+
+    <div class="command-mask" id="commandMask" hidden>
+      <div class="command-panel">
+        <label><span>⌕</span><input id="commandInput" placeholder="输入矿产、政策或公告名称…" /></label>
+        <div id="commandResults"></div>
+        <p><kbd>↑↓</kbd> 选择　<kbd>Enter</kbd> 打开　<kbd>Esc</kbd> 关闭</p>
+      </div>
+    </div>
+
+    <div class="mobile-mask" id="mobileMask"></div>
+    <script src="./announcement-items.js"></script>
+    <script src="./intelligence-snapshots.js"></script>
+    <script src="./library-index.js"></script>
+    <script src="./app.js?v=20260705-vibrant-modules-v2"></script>
+  </body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#020b1c">
+<title>AI大模型应用探索｜关键矿产情报采集分析系统</title>
+<style>
+:root{
+  --bg:#020817;--panel:#061a36;--panel2:#08264d;--line:#087bdc;--cyan:#25d9ff;
+  --blue:#1595ff;--text:#effaff;--muted:#8bb5d0;--green:#38efb1;--amber:#ffc66d;
+  --red:#ff6d7d;--shadow:0 0 28px rgba(0,153,255,.18);--ease:cubic-bezier(.22,1,.36,1)
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{
+  color:var(--text);font-family:"Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;
+  background:radial-gradient(circle at 50% 30%,#072653 0,#020817 45%,#01040d 100%);
+  -webkit-font-smoothing:antialiased
+}
+button{font:inherit;color:inherit}
+#network{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.55;pointer-events:none}
+.noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.2;background-image:linear-gradient(rgba(52,178,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(52,178,255,.02) 1px,transparent 1px);background-size:34px 34px}
+.deck{height:100%;position:relative;z-index:2;transition:transform .8s var(--ease);will-change:transform}
+.slide{height:100vh;width:100%;padding:clamp(54px,6vh,78px) clamp(34px,6vw,108px) clamp(44px,5vh,62px);position:relative;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.slide::before,.slide::after{content:"";position:absolute;pointer-events:none}
+.slide::before{inset:16px;border:1px solid rgba(27,159,255,.5);clip-path:polygon(0 20px,20px 0,34% 0,35% 6px,65% 6px,66% 0,calc(100% - 20px) 0,100% 20px,100% calc(100% - 20px),calc(100% - 20px) 100%,20px 100%,0 calc(100% - 20px))}
+.slide::after{inset:24px;background:linear-gradient(90deg,var(--cyan),transparent 18%,transparent 82%,var(--cyan)) top/100% 1px no-repeat;opacity:.38}
+.slide.active .reveal{opacity:1;transform:none}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal:nth-child(2){transition-delay:.08s}.reveal:nth-child(3){transition-delay:.16s}.reveal:nth-child(4){transition-delay:.24s}
+.eyebrow{color:var(--cyan);font-size:12px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:32px;height:2px;background:linear-gradient(90deg,transparent,var(--cyan));box-shadow:0 0 8px var(--cyan)}
+.title{font-size:clamp(28px,3.1vw,54px);line-height:1.16;letter-spacing:.02em;text-shadow:0 0 22px rgba(58,178,255,.42);margin-bottom:10px}
+.title strong{color:#fff}
+.subtitle{color:#b8d5e6;font-size:clamp(13px,1.16vw,19px);line-height:1.75;max-width:1050px}
+.header{margin-bottom:clamp(18px,2.5vh,30px);position:relative;z-index:2}
+.header::after{content:"";display:block;width:min(480px,44vw);height:1px;margin-top:14px;background:linear-gradient(90deg,var(--cyan),transparent);box-shadow:0 0 12px rgba(37,217,255,.5)}
+.grid{display:grid;gap:clamp(10px,1.25vw,20px);position:relative;z-index:2}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{
+  position:relative;padding:clamp(14px,1.55vw,24px);border:1px solid rgba(20,157,255,.46);
+  background:linear-gradient(135deg,rgba(8,35,73,.9),rgba(2,15,35,.78));box-shadow:inset 0 0 28px rgba(0,119,255,.05),var(--shadow);overflow:hidden
+}
+.card::before{content:"";position:absolute;left:-1px;top:-1px;width:34px;height:3px;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.card::after{content:"";position:absolute;right:0;bottom:0;width:42px;height:1px;background:var(--cyan)}
+.card h3{font-size:clamp(15px,1.32vw,22px);margin-bottom:8px;color:#eafbff}.card h3 b{color:var(--cyan)}
+.card p,.card li{font-size:clamp(11px,.86vw,15px);line-height:1.7;color:var(--muted)}
+.card ul{list-style:none}.card li{padding-left:14px;position:relative}.card li::before{content:"";position:absolute;left:0;top:.72em;width:5px;height:5px;border:1px solid var(--cyan);transform:rotate(45deg)}
+.num{font-family:"Bahnschrift","DIN Alternate",sans-serif;font-size:clamp(31px,3vw,52px);font-weight:700;color:#fff;line-height:1;text-shadow:0 0 18px var(--blue)}
+.unit{font-size:13px;color:var(--cyan);margin-left:4px}.label{color:var(--muted);font-size:13px;margin-top:7px}
+.icon{width:44px;height:44px;border:1px solid rgba(37,217,255,.55);display:grid;place-items:center;color:var(--cyan);font-size:23px;background:rgba(0,115,255,.1);box-shadow:inset 0 0 20px rgba(0,157,255,.12),0 0 16px rgba(0,157,255,.12);margin-bottom:13px}
+.tag{display:inline-block;border:1px solid rgba(37,217,255,.34);padding:3px 9px;color:#9ddaf4;background:rgba(5,119,205,.12);font-size:11px;margin:3px 4px 0 0}
+.accent{color:var(--cyan)}.green{color:var(--green)}.amber{color:var(--amber)}.red{color:var(--red)}
+.note{font-size:11px;color:#6c99b7;border-left:2px solid var(--cyan);padding-left:10px;margin-top:12px}
+.hero{align-items:center;text-align:center;padding-left:8vw;padding-right:8vw}
+.hero::after{background:linear-gradient(90deg,var(--cyan),transparent 28%,transparent 72%,var(--cyan)) top/100% 1px no-repeat}
+.hero-title{font-size:clamp(40px,5.2vw,88px);line-height:1.15;letter-spacing:.035em;font-weight:800;max-width:1280px;text-shadow:0 0 12px #0d8bff,0 0 38px rgba(0,124,255,.58)}
+.hero-title small{display:block;font-size:.76em}
+.hero-sub{max-width:980px;margin:26px auto 0;padding:12px 28px;border:1px solid rgba(37,217,255,.55);background:rgba(4,29,61,.72);color:#d7f3ff;font-size:clamp(13px,1.2vw,20px);line-height:1.7;box-shadow:0 0 24px rgba(0,145,255,.16)}
+.hero-kicker{margin-bottom:18px;color:var(--cyan);font-size:12px;letter-spacing:.42em}.hero-kicker span{opacity:.45}
+.core{position:relative;width:min(720px,58vw);height:170px;margin:10px auto -12px}
+.core-ring{position:absolute;left:50%;top:50%;border:1px solid var(--cyan);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 16px var(--blue),inset 0 0 20px rgba(0,166,255,.3);animation:ring 4s linear infinite}
+.core-ring:nth-child(1){width:72%;height:62px}.core-ring:nth-child(2){width:48%;height:94px;animation-direction:reverse}.core-ring:nth-child(3){width:28%;height:120px}
+.core-beam{position:absolute;left:50%;top:3px;width:2px;height:158px;background:linear-gradient(transparent,var(--cyan),#fff,var(--cyan),transparent);box-shadow:0 0 20px 7px rgba(0,157,255,.35)}
+@keyframes ring{50%{filter:brightness(1.7);transform:translate(-50%,-50%) scale(1.025)}}
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.metric{text-align:center;padding:16px 8px}
+.split{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(18px,3vw,52px);align-items:center;position:relative;z-index:2}
+.problem{display:flex;gap:13px;align-items:flex-start;padding:14px 16px;margin-bottom:10px;border-left:2px solid var(--blue);background:linear-gradient(90deg,rgba(8,73,139,.26),transparent)}
+.problem .n{font:700 26px "Bahnschrift";color:var(--cyan);text-shadow:0 0 12px var(--cyan)}.problem h3{font-size:16px;margin-bottom:4px}.problem p{font-size:12px;color:var(--muted);line-height:1.6}
+.flow{display:flex;align-items:stretch;gap:9px}.flow .step{flex:1;text-align:center;padding:17px 8px;border:1px solid rgba(37,217,255,.4);background:rgba(4,35,72,.72);position:relative}.flow .step:not(:last-child)::after{content:"›";position:absolute;right:-10px;top:50%;transform:translateY(-54%);z-index:2;color:var(--cyan);font-size:24px}.flow b{display:block;color:var(--cyan);font-size:15px}.flow span{font-size:11px;color:var(--muted)}
+.architecture{display:grid;grid-template-columns:.82fr 1.6fr;gap:26px;align-items:center}
+.rings{height:410px;position:relative;display:grid;place-items:center}.platform{position:absolute;width:90%;height:72px;border:2px solid var(--cyan);border-radius:50%;background:radial-gradient(ellipse,rgba(17,151,255,.3),rgba(3,27,64,.4) 50%,transparent 70%);box-shadow:0 0 26px rgba(0,171,255,.4),inset 0 0 30px rgba(0,122,255,.3)}.platform:nth-child(1){top:30px}.platform:nth-child(2){top:150px}.platform:nth-child(3){top:270px}.platform::after{content:"";position:absolute;left:50%;top:100%;height:48px;border-left:1px dashed var(--cyan)}.platform:last-child::after{display:none}.platform b{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:18px;white-space:nowrap;text-shadow:0 0 14px var(--cyan)}
+.layer{display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:center;padding:16px 18px;margin:10px 0;border:1px solid rgba(37,217,255,.52);background:linear-gradient(90deg,rgba(8,58,114,.72),rgba(3,22,48,.66));position:relative}.layer .ln{font:700 32px "Bahnschrift";color:var(--cyan)}.layer h3{font-size:18px;margin-bottom:3px}.layer p{font-size:12px;color:var(--muted)}
+.section-intro{text-align:center;align-items:center}.section-intro .title{font-size:clamp(36px,4.3vw,70px)}.section-intro .subtitle{max-width:850px}.section-intro .intro-no{font:800 clamp(72px,11vw,180px) "Bahnschrift";line-height:.8;position:absolute;opacity:.05;color:var(--cyan)}
+.intro-visual{width:min(840px,72vw);height:190px;position:relative;margin-top:32px}.intro-line{position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 15px var(--cyan)}.intro-nodes{height:100%;display:flex;justify-content:space-around;align-items:center}.intro-node{width:100px;height:100px;border:1px solid var(--cyan);transform:rotate(45deg);display:grid;place-items:center;background:rgba(0,84,159,.2);box-shadow:0 0 25px rgba(0,153,255,.35)}.intro-node span{transform:rotate(-45deg);font-size:28px;color:var(--cyan)}.intro-node:nth-child(even){margin-top:54px}
+.dashboard{display:grid;grid-template-columns:.72fr 1.35fr .8fr;gap:14px;min-height:450px}.stack{display:grid;gap:10px}.mini{padding:14px;border:1px solid rgba(37,217,255,.4);background:rgba(3,26,56,.78)}.mini b{font-size:24px;color:#fff}.mini span{font-size:11px;color:var(--muted);display:block}
+.globe{min-height:320px;position:relative;display:grid;place-items:center}.globe-ball{width:min(28vw,310px);aspect-ratio:1;border-radius:50%;border:1px solid var(--cyan);background:radial-gradient(circle at 38% 35%,rgba(67,220,255,.28),rgba(0,91,172,.11) 44%,rgba(0,15,39,.75) 70%),repeating-radial-gradient(ellipse,transparent 0 18px,rgba(37,217,255,.2) 19px 20px);box-shadow:inset -18px -18px 40px #00132c,inset 8px 8px 30px rgba(37,217,255,.15),0 0 42px rgba(0,157,255,.42);position:relative;animation:float 4s ease-in-out infinite}.globe-ball::before,.globe-ball::after{content:"";position:absolute;border:1px solid rgba(37,217,255,.45);border-radius:50%;inset:20% -24%;transform:rotate(-8deg)}.globe-ball::after{inset:-12% 16%;transform:rotate(63deg)}@keyframes float{50%{transform:translateY(-8px)}}
+.radar{height:150px;position:relative;border:1px solid rgba(37,217,255,.3);background:repeating-radial-gradient(circle at center,transparent 0 22px,rgba(37,217,255,.2) 23px 24px),linear-gradient(90deg,transparent 49.8%,rgba(37,217,255,.16) 50%,transparent 50.2%),linear-gradient(transparent 49.8%,rgba(37,217,255,.16) 50%,transparent 50.2%)}.radar::after{content:"";position:absolute;inset:0;background:conic-gradient(from 10deg at 50% 50%,transparent 0 76%,rgba(37,217,255,.22) 88%,transparent 89%);animation:sweep 4s linear infinite}@keyframes sweep{to{transform:rotate(360deg)}}
+.table{width:100%;border-collapse:collapse;font-size:12px}.table th{text-align:left;color:var(--cyan);font-weight:500;padding:10px;background:rgba(0,108,202,.18);border-bottom:1px solid rgba(37,217,255,.45)}.table td{padding:10px;color:#a8cadc;border-bottom:1px solid rgba(44,126,179,.2)}.table tr:hover td{background:rgba(0,130,230,.08);color:#fff}.status{display:inline-block;padding:2px 8px;border:1px solid currentColor;font-size:10px}.status.on{color:var(--green)}.status.pause{color:var(--amber)}
+.bars{display:flex;align-items:flex-end;gap:10px;height:170px;padding:20px 12px 0;border-left:1px solid rgba(37,217,255,.25);border-bottom:1px solid rgba(37,217,255,.25)}.bar{flex:1;height:var(--h);background:linear-gradient(180deg,var(--cyan),#0865d8 65%,rgba(4,50,100,.4));box-shadow:0 0 12px rgba(37,217,255,.2);position:relative;min-width:12px}.bar::after{content:attr(data-v);position:absolute;left:50%;transform:translateX(-50%);top:-19px;font-size:10px;color:#8ddfff}
+.timeline{position:relative;padding:20px 0}.timeline::before{content:"";position:absolute;left:3%;right:3%;top:64px;height:2px;background:linear-gradient(90deg,#1272d8,var(--cyan),#1272d8);box-shadow:0 0 12px var(--cyan)}.times{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.time{text-align:center;position:relative}.time .dot{width:16px;height:16px;border:2px solid var(--cyan);background:#03142e;border-radius:50%;margin:37px auto 16px;box-shadow:0 0 12px var(--cyan)}.time b{font:700 16px "Bahnschrift";color:var(--cyan)}.time p{font-size:11px;color:var(--muted);margin-top:4px}.time.active .dot{background:var(--cyan);box-shadow:0 0 22px var(--cyan)}
+.evidence{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.funnel{display:flex;flex-direction:column;align-items:center;gap:6px}.funnel div{text-align:center;padding:10px;background:linear-gradient(90deg,rgba(5,88,164,.34),rgba(8,158,226,.5),rgba(5,88,164,.34));border:1px solid rgba(37,217,255,.35);font-size:12px;color:#cfedfa}.funnel div:nth-child(1){width:100%}.funnel div:nth-child(2){width:85%}.funnel div:nth-child(3){width:68%}.funnel div:nth-child(4){width:52%;color:var(--cyan)}
+.chat{display:grid;grid-template-columns:.8fr 1.2fr;gap:16px}.query{padding:15px;border:1px solid rgba(37,217,255,.5);background:rgba(2,20,44,.85);margin-bottom:10px;font-size:12px;color:#b9d9e9}.query::before{content:"Q";display:inline-grid;place-items:center;width:24px;height:24px;margin-right:9px;background:#0d6fc8;color:#fff}.answer{padding:20px;border:1px solid rgba(37,217,255,.42);background:linear-gradient(135deg,rgba(7,47,92,.84),rgba(2,19,43,.83));font-size:13px;color:#c7e3ef;line-height:1.8}.source{display:flex;justify-content:space-between;margin-top:13px;padding-top:10px;border-top:1px dashed rgba(37,217,255,.28);font-size:10px;color:#67a8c8}
+.network{height:390px;position:relative}.node{position:absolute;width:74px;height:74px;border:1px solid var(--cyan);border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle,rgba(18,135,221,.45),rgba(2,20,44,.9));box-shadow:0 0 20px rgba(0,157,255,.28);font-size:11px;color:#d7f4ff;z-index:2}.node.main{width:104px;height:104px;left:42%;top:36%;font-size:14px}.node.n1{left:6%;top:12%}.node.n2{left:9%;bottom:7%}.node.n3{right:6%;top:8%}.node.n4{right:5%;bottom:8%}.node.n5{left:37%;top:0}.node.n6{left:43%;bottom:0}.link{position:absolute;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);transform-origin:left;opacity:.58}.route{display:flex;align-items:center;gap:4px;margin:18px 0}.route span{flex:1;padding:12px 5px;text-align:center;border:1px solid rgba(37,217,255,.4);font-size:11px;color:#c6e8f6;background:rgba(5,42,80,.66);position:relative}.route span:not(:last-child)::after{content:"›";position:absolute;right:-8px;color:var(--cyan);z-index:2}
+.report{display:grid;grid-template-columns:1fr 1.15fr;gap:26px}.doc{height:400px;padding:28px 30px;background:linear-gradient(135deg,rgba(9,52,95,.88),rgba(3,20,43,.9));border:1px solid rgba(37,217,255,.5);box-shadow:16px 14px 0 rgba(0,92,171,.12),var(--shadow);position:relative}.doc::before{content:"AI RESEARCH";position:absolute;right:15px;top:12px;font:10px "Bahnschrift";letter-spacing:.2em;color:rgba(37,217,255,.45)}.doc h3{font-size:23px;margin:26px 0 7px}.doc .line{height:6px;background:rgba(137,194,222,.14);margin:10px 0}.doc .line:nth-of-type(2){width:80%}.doc .line:nth-of-type(3){width:94%}.doc .line:nth-of-type(4){width:65%}.doc-chart{height:100px;margin-top:25px;display:flex;align-items:flex-end;gap:8px}.doc-chart i{flex:1;height:var(--h);background:linear-gradient(var(--cyan),#0d58bb)}
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.value{padding:24px;border:1px solid rgba(37,217,255,.48);background:linear-gradient(135deg,rgba(8,50,96,.82),rgba(2,18,40,.8));text-align:center}.value .vicon{font-size:34px;color:var(--cyan);margin-bottom:9px}.value h3{font-size:19px}.value p{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.6}.next{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:16px}.next div{padding:9px 12px;border-left:2px solid var(--cyan);background:rgba(5,50,96,.36);font-size:11px;color:#9ac4da}
+.closing{margin-top:20px;padding:13px;text-align:center;border:1px solid rgba(37,217,255,.4);background:linear-gradient(90deg,transparent,rgba(9,83,151,.25),transparent);color:#d9f3ff;font-size:13px;letter-spacing:.04em}
+.chrome{position:fixed;z-index:10;pointer-events:none}.brand{left:32px;top:26px;font-size:11px;letter-spacing:.18em;color:#66bde7}.brand b{color:var(--cyan)}.page-no{right:36px;top:25px;font:700 12px "Bahnschrift";color:#6bbfe9}.page-no b{font-size:19px;color:#e7faff}.progress{left:50%;bottom:22px;transform:translateX(-50%);width:min(380px,40vw);height:2px;background:rgba(34,133,193,.25)}.progress i{display:block;height:100%;width:5.55%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);transition:width .7s var(--ease)}
+.controls{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:12;display:flex;flex-direction:column;gap:6px}.dotnav{width:7px;height:7px;border:1px solid #1985c9;background:transparent;transform:rotate(45deg);cursor:pointer;transition:.3s}.dotnav.active{background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 9px var(--cyan);transform:rotate(45deg) scale(1.35)}
+.navbtn{position:fixed;z-index:12;bottom:18px;width:30px;height:30px;border:1px solid rgba(37,217,255,.34);background:rgba(3,26,54,.72);cursor:pointer;color:#77ccef}.prev{right:76px}.nextbtn{right:38px}.navbtn:hover{border-color:var(--cyan);color:#fff;box-shadow:0 0 14px rgba(37,217,255,.25)}
+.tip{position:fixed;left:32px;bottom:21px;z-index:10;font-size:10px;color:#477d9d;letter-spacing:.08em}
+@media(max-width:900px){
+  .slide{padding:62px 34px 52px;overflow-y:auto;justify-content:flex-start}.slide::before{inset:8px}.controls{right:12px}.brand{left:20px}.page-no{right:20px}
+  .g3,.g4,.metrics,.values{grid-template-columns:repeat(2,1fr)}.split,.architecture,.dashboard,.evidence,.chat,.report{grid-template-columns:1fr}
+  .rings{height:300px}.platform:nth-child(1){top:10px}.platform:nth-child(2){top:105px}.platform:nth-child(3){top:200px}.dashboard{min-height:auto}.globe{min-height:260px}
+  .network{height:330px}.tip{display:none}.title{font-size:28px}.card p,.card li{font-size:12px}
+}
+@media(max-width:560px){.g2,.g3,.g4,.metrics,.values,.next{grid-template-columns:1fr}.hero-title{font-size:36px}.core{width:90vw}.flow{flex-wrap:wrap}.flow .step{min-width:42%}.times{grid-template-columns:repeat(3,1fr)}.timeline::before{display:none}.slide{padding-left:25px;padding-right:25px}.controls{display:none}}
+@media(prefers-reduced-motion:reduce){.deck,.reveal{transition:none}.core-ring,.globe-ball,.radar::after{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="network"></canvas><div class="noise"></div>
+<div class="chrome brand"><b>AI INTELLIGENCE</b> · 关键矿产情报采集分析系统</div>
+<div class="chrome page-no"><b id="current">01</b> / 18</div>
+<div class="chrome progress"><i id="progress"></i></div>
+<div class="tip">SCROLL / ↑ ↓ / SPACE　切换页面</div>
+<div class="controls" id="dots"></div>
+<button class="navbtn prev" id="prev" aria-label="上一页">↑</button><button class="navbtn nextbtn" id="next" aria-label="下一页">↓</button>
+
+<main class="deck" id="deck">
+  <section class="slide hero active">
+    <div class="hero-kicker reveal"><span>—</span> AI-DRIVEN OPEN SOURCE INTELLIGENCE <span>—</span></div>
+    <h1 class="hero-title reveal">AI大模型应用探索<small>关键矿产情报采集分析系统</small></h1>
+    <div class="hero-sub reveal">以开源情报为基础，以证据化分析为核心，以决策输出为目标，构建面向实战的关键矿产情报作战平台。</div>
+    <div class="core reveal"><i class="core-beam"></i><i class="core-ring"></i><i class="core-ring"></i><i class="core-ring"></i></div>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">01 · BUILDING CONTEXT</div><h2 class="title">从“信息过载”走向“情报驱动”</h2><p class="subtitle">政策密集调整、境外替代供应链加快重构，公开信息、贸易数据与执法案例持续增长。</p></div>
+    <div class="split reveal">
+      <div>
+        <div class="problem"><span class="n">01</span><div><h3>信息来源分散</h3><p>政府公告、境外海关、法院文书、企业资料和贸易数据分布在不同渠道。</p></div></div>
+        <div class="problem"><span class="n">02</span><div><h3>业务规则复杂</h3><p>是否受控不仅取决于税号，还涉及成分、纯度、形态、技术参数、最终用户和政策生效时间。</p></div></div>
+        <div class="problem"><span class="n">03</span><div><h3>研判成果难沉淀</h3><p>搜集、分析、处置和报告编写相互割裂，历史成果难以复用。</p></div></div>
+      </div>
+      <div class="card"><div class="icon">◎</div><h3>建设目标：建立一体化工作链路</h3><p style="margin-bottom:18px">以持续感知为起点，以证据核验为边界，以风险研判为核心，以成果输出进入决策链条。</p><div class="flow"><div class="step"><b>持续感知</b><span>多源汇聚</span></div><div class="step"><b>证据核验</b><span>事实校准</span></div><div class="step"><b>风险研判</b><span>线索分层</span></div><div class="step"><b>成果输出</b><span>服务决策</span></div></div></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">02 · MILESTONES</div><h2 class="title">从平台骨架到业务闭环</h2><p class="subtitle">平台已初步形成“政策底座—态势监测—开源采集—AI研判—报告生成”的完整演示闭环。</p></div>
+    <div class="metrics reveal">
+      <div class="card metric"><div class="num">11<span class="unit">组</span></div><div class="label">出口管制政策<br><span class="green">7 现行</span> · <span class="amber">4 暂停</span></div></div>
+      <div class="card metric"><div class="num">26<span class="unit">项</span></div><div class="label">矿产及材料<br>清单记录</div></div>
+      <div class="card metric"><div class="num">22<span class="unit">种</span></div><div class="label">重点矿产品<br>态势监测</div></div>
+      <div class="card metric"><div class="num">70<span class="unit">+</span></div><div class="label">文件资产<br>统一归档</div></div>
+      <div class="card metric"><div class="num">338<span class="unit">条</span></div><div class="label">贸易数据<br>定向匹配</div></div>
+    </div>
+    <div class="grid g4 reveal" style="margin-top:14px">
+      <div class="card"><h3><b>06</b> 情报快照</h3><p>开源资料结构化留存</p></div>
+      <div class="card"><h3><b>04</b> 执法案例</h3><p>案例与风险模式关联</p></div>
+      <div class="card"><h3><b>05</b> 风险信号</h3><p>走私违规模式提炼</p></div>
+      <div class="card"><h3><b>3 + 2</b> AI成果</h3><p>深度研究 + 战略报告</p></div>
+    </div>
+    <div class="note reveal">口径说明：338条为商业数据库交易明细行，不等同于338票独立出口。</div>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">03 · SYSTEM ARCHITECTURE</div><h2 class="title">三层能力闭环：感知、研判、输出</h2><p class="subtitle">情报工作的价值，不止于看见信息，更在于发现风险、支撑核查、服务决策。</p></div>
+    <div class="architecture reveal">
+      <div class="rings"><div class="platform"><b>◉ 情报感知层</b></div><div class="platform"><b>⌘ 分析研判层</b></div><div class="platform"><b>▤ 决策输出层</b></div></div>
+      <div>
+        <div class="layer"><span class="ln">1</span><div><h3>情报感知层</h3><p>汇聚政策公告、矿产态势、开源情报、执法案例、贸易数据和研究资料。</p></div></div>
+        <div class="layer"><span class="ln">2</span><div><h3>分析研判层</h3><p>通过政策时间轴、智能问答、AI分析、关系图谱和供应链路径识别风险。</p></div></div>
+        <div class="layer"><span class="ln">3</span><div><h3>决策输出层</h3><p>形成核查建议、专题研究、海关要情、综合信息呈报和课题研究报告。</p></div></div>
+        <div class="grid g2" style="margin-top:10px"><div class="mini"><b>DATA</b><span>政策库 · 快照 · 文件 · 贸易数据 · 实体关系</span></div><div class="mini"><b>AI</b><span>检索增强 · 证据提取 · 风险分析 · 报告编排</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide section-intro">
+    <span class="intro-no">01</span><div class="eyebrow reveal">MODULE ONE</div><h2 class="title reveal">情报工作台：持续监测与态势感知</h2><p class="subtitle reveal">围绕关键矿产出口管制场景，构建政策底座、矿产态势、开源情报、执法案例和文件归档五位一体的情报感知体系。</p>
+    <div class="intro-visual reveal"><i class="intro-line"></i><div class="intro-nodes"><div class="intro-node"><span>◫</span></div><div class="intro-node"><span>⌁</span></div><div class="intro-node"><span>◎</span></div><div class="intro-node"><span>⚖</span></div><div class="intro-node"><span>▤</span></div></div></div>
+    <p class="closing reveal" style="width:min(850px,80vw)">让风险信号尽可能早地被发现，让后续分析建立在持续更新、可追溯的情报底座之上。</p>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">04 · INTELLIGENCE OVERVIEW</div><h2 class="title">一张态势图串联政策、市场、执法与研究成果</h2><p class="subtitle">一屏统揽整体态势，让政策变化、市场异动、执法关联和研究成果在同一视角下联动呈现。</p></div>
+    <div class="dashboard reveal">
+      <div class="stack"><div class="mini"><b>11</b><span>组政策动态监测</span></div><div class="mini"><b>22</b><span>种重点矿产品指数</span></div><div class="mini"><b>6 + 4</b><span>情报快照 / 执法案例</span></div><div class="mini"><b>3 + 2</b><span>深度研究 / 战略报告</span></div></div>
+      <div class="card globe"><div class="globe-ball"></div><div style="position:absolute;bottom:16px;text-align:center"><b class="accent">GLOBAL MINERAL INTELLIGENCE</b><p style="font-size:11px;color:var(--muted)">全球关键矿产态势监测</p></div></div>
+      <div class="stack"><div class="radar"></div><div class="card"><h3>3 类重点预警</h3><ul><li>政策到期窗口</li><li>价格与指数异动</li><li>执法案例关联</li></ul></div><div class="mini"><b>LIVE</b><span>政策、情报、案例统一排序</span></div></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">05 · CONTROL LIST</div><h2 class="title">构建统一、可核验的出口管制业务规则底座</h2><p class="subtitle">把复杂政策转化为可查询、可核验、可执行的业务规则。</p></div>
+    <div class="grid g4 reveal">
+      <div class="card"><div class="icon">▣</div><h3>政策完整归集</h3><p>归集镓锗、石墨、锑、钨、中重稀土、超硬材料等 <b class="accent">11组政策</b>。</p></div>
+      <div class="card"><div class="icon">拆</div><h3>商品逐项拆分</h3><p>将公告组合物项拆为 <b class="accent">26项独立记录</b>，支持逐项查询。</p></div>
+      <div class="card"><div class="icon">⌕</div><h3>多维关联查询</h3><p>关联物项名称、管制编码、参考税号、政策来源和许可要求。</p></div>
+      <div class="card"><div class="icon">◷</div><h3>状态动态管理</h3><p>现行与暂停分类展示，纳入到期时间和政策恢复逻辑。</p></div>
+    </div>
+    <div class="card reveal" style="margin-top:14px;padding:12px 18px">
+      <table class="table"><thead><tr><th>政策组</th><th>代表物项</th><th>规则维度</th><th>政策状态</th><th>业务动作</th></tr></thead><tbody>
+        <tr><td>镓、锗相关物项</td><td>金属 / 化合物</td><td>成分 · 形态 · 编码</td><td><span class="status on">现行</span></td><td>许可证核验</td></tr>
+        <tr><td>石墨相关物项</td><td>高纯 / 天然鳞片</td><td>纯度 · 粒径 · 用途</td><td><span class="status on">现行</span></td><td>技术参数核查</td></tr>
+        <tr><td>部分中重稀土</td><td>金属 / 靶材 / 磁材</td><td>元素 · 工艺 · 最终用户</td><td><span class="status pause">动态监测</span></td><td>生效时间校验</td></tr>
+      </tbody></table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">06 · MINERAL LANDSCAPE</div><h2 class="title">从政策变化延伸到全球替代供应链竞争</h2><p class="subtitle">不仅关注“管了什么”，还观察境外“如何应对、何时形成替代能力”。</p></div>
+    <div class="split reveal">
+      <div class="card"><h3>22 种重点矿产品出口量指数</h3><p>以2023年为统一基期，观察变化方向</p><div class="bars"><i class="bar" style="--h:57%" data-v="87"></i><i class="bar" style="--h:76%" data-v="112"></i><i class="bar" style="--h:43%" data-v="69"></i><i class="bar" style="--h:88%" data-v="128"></i><i class="bar" style="--h:64%" data-v="96"></i><i class="bar" style="--h:52%" data-v="81"></i><i class="bar" style="--h:72%" data-v="108"></i><i class="bar" style="--h:47%" data-v="73"></i></div><div class="note">当前指数和价格主要用于功能展示，后续需接入权威数据源。</div></div>
+      <div class="grid g2">
+        <div class="card"><div class="icon">↗</div><h3>海外参考价格</h3><p>展示代表性产品价格及月度变动。</p></div>
+        <div class="card"><div class="icon">⊕</div><h3>国别政策态势</h3><p>跟踪中、美、欧、日、韩、澳等经济体。</p></div>
+        <div class="card"><div class="icon">⌁</div><h3>替代进展</h3><p>区分政策宣布、投资建厂、项目建设、试产和商业交付。</p></div>
+        <div class="card"><div class="icon">∞</div><h3>全链条研判</h3><p>矿山、加工、认证、长期承购与战略储备同图分析。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">07 · OPEN SOURCE INTELLIGENCE</div><h2 class="title">让每一条公开信息都成为可追溯的证据线索</h2><p class="subtitle">把网页信息转化为带来源、带时间、带标签、可全文阅读的结构化情报。</p></div>
+    <div class="grid g4 reveal">
+      <div class="card"><div class="icon">▧</div><h3>情报快照</h3><p>保存采集时间、原始链接、来源机构、分类标签和关键事实。</p><span class="tag">6条快照</span></div>
+      <div class="card"><div class="icon">译</div><h3>外文翻译</h3><p>外文资料先完成中文转换，再进入分析和归档流程。</p><span class="tag">原文对照</span></div>
+      <div class="card"><div class="icon">⚖</div><h3>执法案例库</h3><p>按国家、执法机构、矿种、案件状态和流向组织案例。</p><span class="tag">4条案例</span></div>
+      <div class="card"><div class="icon">⚠</div><h3>AI风险信号</h3><p>从案例提炼伪报品名、税号不符、夹藏、拆分出口与异常转运。</p><span class="tag">5类模式</span></div>
+    </div>
+    <div class="card reveal" style="margin-top:16px"><div class="flow"><div class="step"><b>公开网页</b><span>多源采集</span></div><div class="step"><b>情报快照</b><span>时间固化</span></div><div class="step"><b>事实提取</b><span>结构化</span></div><div class="step"><b>案例关联</b><span>证据核验</span></div><div class="step"><b>风险模式</b><span>服务核查</span></div></div><div class="note">当前进展：已完成多矿种筛选框架，钨专题率先形成“采集—案例—风险分析”闭环。</div></div>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">08 · KNOWLEDGE ASSETS</div><h2 class="title">让情报资产统一沉淀，检索不再依赖个人记忆</h2><p class="subtitle">把政策、执法、研究、采集快照和AI生成成果统一归档，形成平台知识底仓。</p></div>
+    <div class="split reveal">
+      <div class="card" style="min-height:340px"><h3><span class="accent">约70项</span> 文件资产统一归档</h3><div class="grid g2" style="margin-top:18px"><div class="mini"><b>DOCX</b><span>研究与报告</span></div><div class="mini"><b>PDF</b><span>政策与执法</span></div><div class="mini"><b>PPT</b><span>汇报与成果</span></div><div class="mini"><b>XLSX</b><span>贸易与指标</span></div><div class="mini"><b>CSV</b><span>结构化数据</span></div><div class="mini"><b>HTML</b><span>情报快照</span></div></div></div>
+      <div class="grid">
+        <div class="card"><h3>01 · 多格式管理</h3><p>支持DOCX、PDF、PPT、Excel、CSV等文件分类管理。</p></div>
+        <div class="card"><h3>02 · 搜索与筛选</h3><p>按来源、文件类型、矿产和资料类别快速定位。</p></div>
+        <div class="card"><h3>03 · 全文预览与分页</h3><p>支持内容预览、下载及每页10条的分页浏览。</p></div>
+        <div class="note">为智能问答、AI分析、深度研究和战略报告提供可复用资料。</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide section-intro">
+    <span class="intro-no">02</span><div class="eyebrow reveal">MODULE TWO</div><h2 class="title reveal">战术研究工具：从信息发现走向风险研判</h2><p class="subtitle reveal">依托情报底座，构建政策演化分析、智能问答、AI风险研判、关系图谱和供应链路径分析能力。</p>
+    <div class="intro-visual reveal"><i class="intro-line"></i><div class="intro-nodes"><div class="intro-node"><span>◷</span></div><div class="intro-node"><span>AI</span></div><div class="intro-node"><span>⌘</span></div><div class="intro-node"><span>⌬</span></div><div class="intro-node"><span>↝</span></div></div></div>
+    <p class="closing reveal" style="width:min(850px,80vw)">让结论说得清、证据追得到、风险定位准、核查建议可执行。</p>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">09 · POLICY TIMELINE</div><h2 class="title">让散落公告进入统一的时间坐标</h2><p class="subtitle">政策不是孤立文件，而是一条包含发布、生效、调整、暂停和恢复的连续监管逻辑线。</p></div>
+    <div class="card reveal">
+      <div class="timeline"><div class="times">
+        <div class="time"><b>2023.07</b><div class="dot"></div><p>镓锗政策<br>发布</p></div>
+        <div class="time active"><b>2023.08</b><div class="dot"></div><p>政策正式<br>生效</p></div>
+        <div class="time"><b>2023.10</b><div class="dot"></div><p>石墨物项<br>调整</p></div>
+        <div class="time"><b>2024.09</b><div class="dot"></div><p>锑相关物项<br>实施</p></div>
+        <div class="time active"><b>2025.02</b><div class="dot"></div><p>钨等物项<br>生效</p></div>
+        <div class="time"><b>NOW</b><div class="dot"></div><p>状态持续<br>监测</p></div>
+      </div></div>
+    </div>
+    <div class="grid g3 reveal" style="margin-top:16px"><div class="card"><h3>年份筛选</h3><p>还原政策演变顺序</p></div><div class="card"><h3>类型筛选</h3><p>区分战略金属、中重稀土、技术及超硬材料</p></div><div class="card"><h3>状态筛选</h3><p>突出管制生效、暂停及到期窗口</p></div></div>
+    <div class="note reveal">工作价值：避免将政策生效前交易错误纳入违规分析，也避免忽略暂停政策对统计结果的影响。</div>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">10 · AI EVIDENCE ANALYSIS</div><h2 class="title">用证据边界框定结论，让风险研判可追溯</h2><p class="subtitle">模型不替代业务判断，而是帮助组织证据、排除错误样本并发现优先核查线索。</p></div>
+    <div class="evidence reveal">
+      <div class="card"><h3>钨专题 · 证据边界过滤</h3><div class="funnel"><div>商业数据库交易明细 · 338条定向匹配</div><div>政策时间校验 · 排除2025年2月4日前交易</div><div>物项 / 税号 / 路线 / 主体交叉验证</div><div>4条许可核查线索 + 2条高优先核查链</div></div><div class="note">识别1起公开处罚案例；事实、推断和待核实事项分开展示。</div></div>
+      <div class="grid g2">
+        <div class="card metric"><div class="num">338</div><div class="label">贸易明细记录</div></div><div class="card metric"><div class="num">01</div><div class="label">公开处罚案例</div></div>
+        <div class="card metric"><div class="num">04</div><div class="label">许可核查线索</div></div><div class="card metric"><div class="num">02</div><div class="label">高优先核查链</div></div>
+        <div class="card" style="grid-column:1/-1"><p><span class="tag">时间与物项双校验</span><span class="tag">主体与单证关联</span><span class="tag">高中优先级分层</span><span class="tag">可核验编号</span><span class="tag">建议动作</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">11 · INTELLIGENT Q&A</div><h2 class="title">像与分析师对话一样查询，答案自动关联来源</h2><p class="subtitle">不仅回答“是什么”，还说明“依据来自哪里”。</p></div>
+    <div class="chat reveal">
+      <div><div class="query">2025年2月后，钨相关物项有哪些新增管制要求？</div><div class="query">某商品税号是否落入公告参考范围？</div><div class="query">近期境外有哪些替代供应链项目？</div><div class="card"><h3>五类数据源</h3><p><span class="tag">政策管制</span><span class="tag">情报快照</span><span class="tag">市场数据</span><span class="tag">文件库</span><span class="tag">公告税号</span></p></div></div>
+      <div class="answer"><b class="accent">AI 分析回答</b><br>依据政策生效时间、物项描述及公告税号进行联合检索。系统按“政策事实—适用条件—待核实事项”组织结果，并提示不能仅凭税号判断是否受控。<div class="source"><span>来源：商务部公告 / 平台政策库</span><span>发布日期：2025-02-04</span></div><div class="source"><span>证据：原文链接 · 文件页码 · 资料来源</span><span>可信度：高</span></div><div style="margin-top:18px"><span class="tag">转入深度研究 →</span><span class="tag">生成核查清单 →</span></div></div>
+    </div>
+    <div class="grid g3 reveal" style="margin-top:14px"><div class="mini"><b>自然语言</b><span>查询政策、矿产、市场和案例</span></div><div class="mini"><b>来源分组</b><span>原文链接、发布日期、资料来源</span></div><div class="mini"><b>研究接力</b><span>问答结果继续转入深度研究</span></div></div>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">12 · GRAPH & SUPPLY CHAIN</div><h2 class="title">从单条线索延伸到主体网络和物流链路</h2><p class="subtitle">把企业、矿产、国家、政策、人员、商品和物流节点放在统一关系视角下分析。</p></div>
+    <div class="split reveal">
+      <div class="card network">
+        <div class="node main">目标企业</div><div class="node n1">股东 / 实控人</div><div class="node n2">同址 / 同电话</div><div class="node n3">商品 / 税号</div><div class="node n4">境外买方</div><div class="node n5">政策 / 案件</div><div class="node n6">收发货人</div>
+        <i class="link" style="left:19%;top:25%;width:29%;transform:rotate(25deg)"></i><i class="link" style="left:20%;top:75%;width:29%;transform:rotate(-25deg)"></i><i class="link" style="left:51%;top:42%;width:39%;transform:rotate(-22deg)"></i><i class="link" style="left:51%;top:55%;width:39%;transform:rotate(24deg)"></i><i class="link" style="left:46%;top:20%;width:22%;transform:rotate(80deg)"></i><i class="link" style="left:47%;top:56%;width:23%;transform:rotate(95deg)"></i>
+      </div>
+      <div><div class="card"><h3>关系图谱框架</h3><ul><li>企业、股东、实际控制人和关联主体</li><li>商品、矿产、税号、政策和案件</li><li>同地址、同电话、同收发货人等弱关联</li><li>一至三层关系扩展与关键节点识别</li></ul></div><div class="route"><span>矿山</span><span>加工</span><span>出口商</span><span>货代</span><span>港口</span><span>境外买方</span></div><div class="card"><h3>供应链路径框架</h3><p>对比正常与异常绕行路线，监测路径突变、集中度及高风险中转节点；关联启运港、中转港、目的港和最终用户。</p></div></div>
+    </div>
+    <div class="note reveal">建设口径：目前已完成信息架构与页面蓝图，下一步接入图数据库、企业关系和物流数据。</div>
+  </section>
+
+  <section class="slide section-intro">
+    <span class="intro-no">03</span><div class="eyebrow reveal">MODULE THREE</div><h2 class="title reveal">战略报告生成：让情报成果进入决策链条</h2><p class="subtitle reveal">把情报、证据、研判和图表组织为规范化决策产品，推动信息情报工作从资料支撑走向服务决策前端。</p>
+    <div class="intro-visual reveal"><i class="intro-line"></i><div class="intro-nodes"><div class="intro-node"><span>⌕</span></div><div class="intro-node"><span>⚖</span></div><div class="intro-node"><span>AI</span></div><div class="intro-node"><span>▥</span></div><div class="intro-node"><span>✓</span></div></div></div>
+    <p class="closing reveal" style="width:min(900px,82vw)">让每一次采集、每一次核查和每一轮研判，最终沉淀为可以复用、审核和上报的正式成果。</p>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">13 · AI DEEP RESEARCH</div><h2 class="title">从研究问题到正式报告的一体化生成</h2><p class="subtitle">AI Agent完成问题拆解、多轮检索、证据分级、交叉核验和报告编排，人工负责审核和最终定稿。</p></div>
+    <div class="report reveal">
+      <div class="doc"><div class="eyebrow">STRATEGIC REPORT</div><h3>关键矿产供应链重构与风险防控研究</h3><p style="font-size:12px;color:var(--muted)">政策演进 · 企业动态 · 贸易路径 · 风险建议</p><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="doc-chart"><i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:47%"></i><i style="--h:75%"></i><i style="--h:88%"></i><i style="--h:66%"></i></div></div>
+      <div><div class="grid g2"><div class="card"><h3><b>3份</b> AI深度研究</h3><p>问题拆解 · 检索计划 · 证据分级 · 交叉核验 · 图表脚注</p></div><div class="card"><h3><b>2份</b> AI战略报告</h3><p>海关要情 · 综合信息呈报 · 课题研究报告</p></div></div><div class="card" style="margin-top:14px"><h3>深度研究工作流</h3><div class="flow" style="margin-top:14px"><div class="step"><b>拆解</b><span>研究问题</span></div><div class="step"><b>检索</b><span>多源资料</span></div><div class="step"><b>核验</b><span>证据分级</span></div><div class="step"><b>编排</b><span>观点图表</span></div><div class="step"><b>审核</b><span>人工定稿</span></div></div></div><div class="card" style="margin-top:14px"><h3>成果覆盖</h3><p><span class="tag">反管制体系</span><span class="tag">供应链重构</span><span class="tag">监管难点</span><span class="tag">风险防控</span><span class="tag">Word / PDF</span><span class="tag">查看 · 下载 · 归档</span></p></div></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">14 · VALUE & ROADMAP</div><h2 class="title">让信息情报工作从“资料支撑”走向“风险牵引”</h2></div>
+    <div class="values reveal">
+      <div class="value"><div class="vicon">⌬</div><h3>情报更系统</h3><p>政策、市场、执法、案例和文件统一归集，减少信息孤岛。</p></div>
+      <div class="value"><div class="vicon">◎</div><h3>研判更精准</h3><p>通过证据边界、AI分析和路径关联，提高风险识别质量。</p></div>
+      <div class="value"><div class="vicon">▤</div><h3>输出更专业</h3><p>把情报成果转化为核查建议、专题研究和正式报告。</p></div>
+    </div>
+    <div class="card reveal" style="margin-top:17px"><h3>下一步建设路线</h3><div class="next"><div>01 · 接入权威出口量、价格和贸易数据</div><div>02 · 扩展钨以外矿产专题</div><div>03 · 建设企业实体库和关系图数据库</div><div>04 · 接入物流、提运单和许可证核验数据</div><div>05 · 对接内网千问模型及海关业务系统</div><div>06 · 增加权限、审计、人工复核和报告审批</div></div></div>
+    <p class="closing reveal">情报不是终点，研判也不是终点。真正的目标，是把信息优势转化为风险防控优势，把分析成果转化为决策支撑能力。</p>
+  </section>
+</main>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')],deck=document.getElementById('deck'),dots=document.getElementById('dots');
+let index=0,busy=false,touchY=0;
+slides.forEach((_,i)=>{const b=document.createElement('button');b.className='dotnav'+(i===0?' active':'');b.title=`第 ${i+1} 页`;b.onclick=()=>go(i);dots.appendChild(b)});
+function go(n){
+  n=Math.max(0,Math.min(slides.length-1,n));if(n===index)return;
+  index=n;busy=true;deck.style.transform=`translate3d(0,-${index*100}vh,0)`;
+  slides.forEach((s,i)=>s.classList.toggle('active',i===index));
+  [...dots.children].forEach((d,i)=>d.classList.toggle('active',i===index));
+  document.getElementById('current').textContent=String(index+1).padStart(2,'0');
+  document.getElementById('progress').style.width=`${(index+1)/slides.length*100}%`;
+  setTimeout(()=>busy=false,780)
+}
+document.getElementById('prev').onclick=()=>go(index-1);document.getElementById('next').onclick=()=>go(index+1);
+addEventListener('wheel',e=>{if(!busy&&Math.abs(e.deltaY)>18)go(index+(e.deltaY>0?1:-1))},{passive:true});
+addEventListener('keydown',e=>{if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(index+1)}if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(index-1)}if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1)});
+addEventListener('touchstart',e=>touchY=e.touches[0].clientY,{passive:true});addEventListener('touchend',e=>{const d=touchY-e.changedTouches[0].clientY;if(Math.abs(d)>50)go(index+(d>0?1:-1))},{passive:true});
+const c=document.getElementById('network'),ctx=c.getContext('2d');let pts=[];
+function size(){c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);pts=Array.from({length:Math.min(90,Math.floor(innerWidth/18))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*1.3+.35}))}
+function draw(){ctx.clearRect(0,0,innerWidth,innerHeight);for(let i=0;i<pts.length;i++){const p=pts[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>innerWidth)p.vx*=-1;if(p.y<0||p.y>innerHeight)p.vy*=-1;ctx.fillStyle='rgba(39,193,255,.48)';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fill();for(let j=i+1;j<pts.length;j++){const q=pts[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<130){ctx.strokeStyle=`rgba(18,129,220,${.11*(1-d/130)})`;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke()}}}requestAnimationFrame(draw)}
+addEventListener('resize',size);size();draw();
+</script>
+</body>
+</html>
