@@ -110,7 +110,7 @@ const alternativeCountryActions = [
   {code:"EE",name:"爱沙尼亚",tone:"cyan",focus:"稀土磁体",status:"磁体产能落地",action:"依托既有稀土加工基础，把欧洲供应链从分离环节继续延伸至烧结永磁体制造。",facilities:["Neo Performance Narva磁体工厂","Silmet稀土加工基地"]},
   {code:"CA",name:"加拿大",tone:"teal",focus:"稀土 · 金属化",status:"分阶段投运",action:"推动稀土分离和金属化设施分阶段投运，并以公共融资、五年承购和扩建研究连接北美下游需求。",facilities:["SRC Saskatchewan稀土加工与金属化","NdPr金属商业产线","Dy/Tb氧化物与金属扩展"]},
   {code:"JP",name:"日本",tone:"red",focus:"重稀土 · 长期承购",status:"海外锁量",action:"不以国内大规模采矿为主，而以JOGMEC投资、长期承购、储备和资源外交锁定海外份额。",facilities:["持续投资Lynas全产业链","支持Caremag并锁定镝铽供应","推进回收磁体原料体系"]},
-  {code:"KR",name:"韩国",tone:"green",focus:"钨 · 电池材料",status:"矿山重启+制造协同",action:"支持海外资源开发与储备，同时利用电池、半导体和汽车需求为项目提供下游市场。",facilities:["Sangdong钨矿重启","海外资源开发与回收项目"]},
+  {code:"KR",name:"韩国",tone:"green",focus:"钨 · 电池材料",status:"矿山重启+制造协同",action:"围绕 Sangdong 钨矿重启形成非中国钨精矿增量；稳定供应仍取决于实际投产和中游加工配套。",facilities:["Sangdong钨矿重启","中游加工配套待跟踪"]},
   {code:"BR",name:"巴西",tone:"green",focus:"中重稀土",status:"商业爬坡",action:"推动离子吸附型稀土资源商业化，增加西半球中重稀土矿端选择。",facilities:["Serra Verde Pela Ema项目"]},
   {code:"MY",name:"马来西亚",tone:"cyan",focus:"稀土分离",status:"商业扩展",action:"在既有规模化分离基础上扩展镝、铽等重稀土产品，承担中国以外中游节点。",facilities:["Lynas Malaysia分离基地","重稀土商业化扩展"]},
   {code:"IN",name:"印度",tone:"amber",focus:"勘探 · 加工 · 回收",status:"国家任务推进",action:"把勘探拍卖、加工园区、海外资产、尾矿利用和研发纳入统一任务体系。",facilities:["关键矿产加工园区","KABIL海外资源布局","国内稀土与回收能力扩建"]},
@@ -140,6 +140,49 @@ const alternativeSupplyProjects = [
   {name:"副产镓锗回收项目",region:"美国 / 欧洲 / 日本",mineral:"镓、锗",stage:"研发至扩产",stageKey:"pilot",chain:"铝土矿 / 锌冶炼 / 煤灰—高纯精制",progress:"围绕既有铝、锌和煤系原料流增加回收与高纯精制能力。",bottleneck:"副产原料流量、回收率、纯度和小市场经济性"}
 ];
 
+// 替代项目仅以公开一手材料核验进度；“待补充”不作为已形成供应能力的依据。
+const alternativeProjectVerification = {
+  "Mountain Pass / MP Materials":{date:"2026-02-26",source:"MP Materials 官方公告",url:"https://investors.mpmaterials.com/investor-news/news-details/2026/MP-Materials-Selects-Northlake-Texas-as-the-Site-of-10X-a-New-U-S--Rare-Earth-Magnet-Manufacturing-Campus/default.aspx",status:"已核验 · 现有产线运营，10X 为建设计划"},
+  "Lynas · Mt Weld—Malaysia":{date:"2026-03-02",source:"马来西亚许可续期报道",url:"https://apnews.com/article/a9e3f931987ca2011133fee15f666fac",status:"已核验 · 现有分离基地运营，扩展需持续跟踪"},
+  "Caremag Lacq":{date:"2025-03-17",source:"日本经济产业省 / JOGMEC",url:"https://www.meti.go.jp/english/press/2025/0317_002.html",status:"已核验 · 建设中，非商业供应"},
+  "Eneabba":{date:"2026-02-20",source:"Iluka 2025 年报",url:"https://www.iluka.com/media/yhwn2hzi/iluka-ar25-final-single-pages-18226.pdf",status:"已核验 · 精炼厂建设项目，未作商业供给计入"},
+  "Serra Verde":{date:"2026-02-05",source:"Serra Verde 官方公告",url:"https://www.serraverde.com/2026/02/serra-verde-secures-us565-million-financing-from-us-international-development-finance-corporation/",status:"已核验 · 已商业生产，仍在优化扩产"},
+  "White Mesa / Energy Fuels":{date:"2026-03-25",source:"Energy Fuels 官方公告",url:"https://investors.energyfuels.com/2026-03-25-Energy-Fuels-Announces-First-U-S-Primary-Production-of-Critical-Heavy-Rare-Earth-Material-in-Decades",status:"已核验 · 重稀土为试产/小批量，规模化待验证"},
+  "eVAC Magnetics":{date:"—",source:"企业项目页",url:"https://evacmagnetics.com/",status:"待补充核验 · 需补入最新投产与认证公告"},
+  "Neo Performance Narva":{date:"2025-09-19",source:"Neo Performance Materials 官方公告",url:"https://www.neomaterials.com/estonia/2/",status:"已核验 · 工厂已启用，产能爬坡中"},
+  "SRC Saskatchewan":{date:"—",source:"Saskatchewan Research Council 项目页",url:"https://www.srcsk.ca/",status:"待补充核验 · 需补入最新分离/金属化投运公告"},
+  "Solvay La Rochelle":{date:"2025-04-08",source:"Solvay 官方公告",url:"https://www.solvay.com/en/press-release/solvay-advances-european-rare-earths-production-through-capacity-expansion",status:"已核验 · 永磁材料稀土产线已启动商业生产"},
+  "Nolans / Arafura":{date:"2026-05-21",source:"澳大利亚出口融资机构",url:"https://www.exportfinance.gov.au/newsroom/strategic-reserve-supporting-arafura-final-investment-decision/",status:"已核验 · 已作出投资决定，尚未形成供给"},
+  "Wagerup / Alcoa—Sojitz":{date:"2025-10-20",source:"Alcoa 官方公告",url:"https://news.alcoa.com/press-releases/press-release-details/2025/GOVERNMENTS-ANNOUNCE-SUPPORT-FOR-ALCOAS-GALLIUM-CRITICAL-MINERAL-DEVELOPMENT-PROJECT-IN-WESTERN-AUSTRALIA/default.aspx",status:"已核验 · 联合开发阶段，非已投产项目"},
+  "Songwe Hill":{date:"—",source:"Mkango 项目页",url:"https://mkango.ca/",status:"待补充核验 · 工程与融资状态需以公司最新公告确认"},
+  "Longonjo":{date:"2026-06-08",source:"Pensana 官方运营更新",url:"https://pensana.co.uk/operational-update-8th-june-2026/",status:"已核验 · 项目推进中，商业供给尚待确认"},
+  "Phalaborwa":{date:"2026-07-01",source:"伦敦证券交易所公司公告",url:"https://www.londonstockexchange.com/news-article/ECOR/update-on-the-phalaborwa-rare-earths-project-dfs/17667420",status:"已核验 · 可研/工程阶段，目标不等于已投产"},
+  "Sangdong":{date:"2025-07-03",source:"Almonty 技术报告更新",url:"https://almonty.com/wp-content/uploads/2025/07/AII_NR250703_2.pdf",status:"已核验 · 当时预计下半年投产，需补入实际投产证明"},
+  "北美石墨项目群":{date:"—",source:"聚合观察项",url:"https://www.novonixgroup.com/",status:"待拆分核验 · 不作为单一项目或已形成供应能力"},
+  "副产镓锗回收项目":{date:"—",source:"聚合观察项",url:"https://www.alcoa.com/",status:"待拆分核验 · 各项目工艺、规模与投产状态不同"}
+};
+
+// 国别行动以一项代表性公开项目作核验锚点；不据此推定该国全部替代能力已落地。
+const alternativeCountryVerification = {
+  US:"Mountain Pass / MP Materials", AU:"Nolans / Arafura", FR:"Solvay La Rochelle", EE:"Neo Performance Narva", CA:"SRC Saskatchewan", JP:"Caremag Lacq", KR:"Sangdong", BR:"Serra Verde", MY:"Lynas · Mt Weld—Malaysia", IN:null, MW:"Songwe Hill", AO:"Longonjo", ZA:"Phalaborwa"
+};
+
+const alternativeCountryEvidence = {
+  US:{date:"2026-02-26",source:"MP Materials 官方公告",url:"https://investors.mpmaterials.com/investor-news/news-details/2026/MP-Materials-Selects-Northlake-Texas-as-the-Site-of-10X-a-New-U-S--Rare-Earth-Magnet-Manufacturing-Campus/default.aspx",status:"已核验"},
+  AU:{date:"2026-05-21",source:"澳大利亚出口融资机构",url:"https://www.exportfinance.gov.au/newsroom/strategic-reserve-supporting-arafura-final-investment-decision/",status:"已核验"},
+  FR:{date:"2025-04-08",source:"Solvay 官方公告",url:"https://www.solvay.com/en/press-release/solvay-advances-european-rare-earths-production-through-capacity-expansion",status:"已核验"},
+  EE:{date:"2025-09-19",source:"Neo Performance Materials 官方公告",url:"https://www.neomaterials.com/estonia/2/",status:"已核验"},
+  CA:{date:"2025-12-08",source:"萨斯喀彻温省政府公告",url:"https://www.saskatchewan.ca/government/news-and-media/2025/december/08/saskatchewan-research-council-and-realloys-sign-historic-rare-earth-partnership-agreements-advancing",status:"已核验"},
+  JP:{date:"2025-03-17",source:"JOGMEC 官方公告",url:"https://www.jogmec.go.jp/english/news/release/release_00412.html",status:"已核验"},
+  KR:{date:"2025-07-03",source:"Almonty 技术报告更新",url:"https://almonty.com/wp-content/uploads/2025/07/AII_NR250703_2.pdf",status:"已核验"},
+  BR:{date:"2026-02-05",source:"Serra Verde 官方公告",url:"https://www.serraverde.com/2026/02/serra-verde-secures-us565-million-financing-from-us-international-development-finance-corporation/",status:"已核验"},
+  MY:{date:"2026-03-02",source:"马来西亚许可续期报道",url:"https://apnews.com/article/a9e3f931987ca2011133fee15f666fac",status:"已核验"},
+  IN:{date:"2025-03-24",source:"印度政府新闻局",url:"https://mines.gov.in/admin/storage/ckeditor/Press_Release_Press_Information_Bureau_1751013391.pdf",status:"已核验"},
+  MW:{date:"2025-12-01",source:"世界银行马拉维国别报告",url:"https://documents1.worldbank.org/curated/en/099120725140521030/pdf/P501730-eb5acf1a-8ebe-45d8-847c-7c2bd17a2e52.pdf",status:"已核验"},
+  AO:{date:"2026-06-08",source:"Pensana 官方运营更新",url:"https://pensana.co.uk/operational-update-8th-june-2026/",status:"已核验"},
+  ZA:{date:"2026-07-01",source:"伦敦证券交易所公司公告",url:"https://www.londonstockexchange.com/news-article/ECOR/update-on-the-phalaborwa-rare-earths-project-dfs/17667420",status:"已核验"}
+};
+
 const alternativeMineralReadiness = [
   {name:"稀土",source:"中",processing:"低",technology:"低",horizon:"5年以上",note:"矿端多点出现，但分离、金属化、磁体良率和客户认证仍是核心瓶颈。"},
   {name:"钨",source:"中",processing:"低",technology:"低",horizon:"2—5年",note:"矿山重启可补充精矿，APT、碳化钨和高规格粉末仍难快速替代。"},
@@ -156,7 +199,7 @@ const alternativeTimeHorizons = [
 
 const modules = {
   overview:{title:"情报总览",icon:"⌂",desc:"汇总关键矿产政策变化、供应风险与重点预警。",items:["风险仪表盘","最新动态","重点预警"]},
-  "intelligence-analysis":{title:"开源信息情报",icon:"◈",desc:"围绕关键矿产汇集公开情报、执法查发案例与AI风险研判。",items:["开源情报搜索","执法查发案例","走私违规分析"]},
+  "intelligence-analysis":{title:"开源信息情报",icon:"◈",desc:"围绕关键矿产汇集公开情报、执法查发案例与AI风险研判。",items:["情报快照","执法查发案例","走私违规分析"]},
   minerals:{title:"关键矿产态势",icon:"◇",desc:"逐项跟踪关键矿产出口量变化与海外市场参考价格。",items:["出口态势","海外价格","市场信号"]},
   countries:{title:"文件库",icon:"◎",desc:"集中归集关键矿产政策文件、执法资料与研究材料。",items:["政策文件","执法资料","研究材料"]},
   timeline:{title:"政策时间轴",icon:"⌁",desc:"把公告、调整、暂停与生效节点放在统一时间轴中追踪。",items:["时间筛选","事件关联","状态变更"]},
@@ -497,6 +540,7 @@ const tungstenCases = [
 const tungstenRiskSignals = [
   {level:"高",title:"申报品名或税号与实物特征不一致",analysis:"合同、发票、检测报告与报关品名之间出现明显差异，或管制属性判定材料缺失。",check:"核验成分、粒度、形态、用途、税号及许可证的一致性。"},
   {level:"高",title:"普通货物中出现高密度金属粉末或异常夹带",analysis:"包装物、样品或普通低值货物与扫描、称重、材质检测结果不匹配。",check:"结合机检图像、重量偏差、取样检测和装箱记录开展复核。"},
+  {level:"高",title:"韩国采购放量与对日再出口同步",analysis:"对韩碳化钨或钨粉出口短期高增，且韩国本土产能、库存消化和对日出口数据无法解释全部增量。",check:"比对中国出口、韩国进口、韩国对日出口、日本进口和买方产能，核验最终用户及再出口承诺。"},
   {level:"中高",title:"短期多批次、小批量或简易渠道集中出口",analysis:"同一主体、收货人或关联货代通过快件、市场采购等渠道连续拆分出货。",check:"穿透关联企业、地址、电话、付款人与物流轨迹，按时间窗口聚合研判。"},
   {level:"中高",title:"第三国中转与最终用户信息不匹配",analysis:"合同目的国、物流中转地、付款来源和最终用途说明存在矛盾或频繁变化。",check:"核验最终用户、最终用途、转运路径及第三方付款的合理性。"},
   {level:"中",title:"技术资料或远程访问替代实物交付",analysis:"受控工艺、参数、图纸可能通过邮件、云盘、远程账号等非货物渠道向境外传输。",check:"审查数据分级、境外访问日志、技术服务合同和许可范围。"}
@@ -881,24 +925,25 @@ function renderCriticalMineralSituationPanel(){
     <section class="cm-country-action-section">
       <div class="cm-subsection-head"><div><h3>各国替代行动与投资建厂</h3><p>按国家梳理政策投入、在建工厂、海外投资和长期承购安排</p></div><span>${alternativeCountryActions.length} ECONOMIES</span></div>
       <div class="cm-country-action-grid">
-        ${alternativeCountryActions.map((item,index)=>`
+        ${alternativeCountryActions.map((item,index)=>{const evidence=alternativeCountryEvidence[item.code];return `
           <article class="cm-country-action-card ${item.tone}" style="--cm-delay:${index*.045}s">
             <header><span>${item.code}</span><div><h4>${item.name}</h4><small>${item.focus}</small></div><b>${item.status}</b></header>
             <p>${item.action}</p>
             <div>${item.facilities.map(facility=>`<span>${facility}</span>`).join("")}</div>
-          </article>`).join("")}
+            <footer class="cm-country-proof">${evidence?`<span class="cm-country-proof-status">${evidence.status}</span><a href="${evidence.url}" target="_blank" rel="noreferrer">来源：${evidence.source}</a><time>发布：${evidence.date}</time>`:`<span>待补充：国家级公开进展来源</span>`}</footer>
+          </article>`;}).join("")}
       </div>
     </section>
     <div class="cm-alternative-layout">
       <section class="cm-project-section">
         <div class="cm-subsection-head"><div><h3>代表性替代供应项目</h3><p>仅把商业交付视为有效供应；建设、试产和规划产能分别标识。</p></div><span>${alternativeSupplyProjects.length} PROJECTS</span></div>
         <div class="cm-project-list">
-          ${alternativeSupplyProjects.map((item,index)=>`
+          ${alternativeSupplyProjects.map((item,index)=>{const verification=alternativeProjectVerification[item.name];return `
             <article class="cm-project-card" style="--cm-delay:${index*.045}s">
               <div class="cm-project-mark ${item.stageKey}"><i></i><span>${item.mineral}</span></div>
-              <div class="cm-project-main"><header><h4>${item.name}</h4><span>${item.region}</span></header><p>${item.progress}</p><small>${item.chain}</small></div>
+              <div class="cm-project-main"><header><h4>${item.name}</h4><span>${item.region}</span></header><p>${item.progress}</p><small>${item.chain}</small><div class="cm-project-proof"><span class="cm-proof-status ${verification.status.startsWith("已核验")?"verified":"pending"}">${verification.status}</span><a href="${verification.url}" target="_blank" rel="noreferrer">来源：${verification.source}</a><time>发布：${verification.date}</time></div></div>
               <div class="cm-project-stage"><strong>${item.stage}</strong><span>瓶颈：${item.bottleneck}</span></div>
-            </article>`).join("")}
+            </article>`;}).join("")}
         </div>
       </section>
       <section class="cm-readiness-section">
@@ -1192,7 +1237,7 @@ function renderIntelligenceAnalysisPage(){
 
     <section class="panel intel-section">
       <div class="panel-head">
-        <div><h2>开源情报搜索</h2><p>仅展示 ${latestSnapshots.date||"当前"} 最新采集批次；历史批次自动归档至文件库。</p></div>
+        <div><h2>情报快照</h2><p>仅展示 ${latestSnapshots.date||"当前"} 最新采集批次；历史批次自动归档至文件库。</p></div>
         <span class="panel-tag">${snapshots.length} LATEST SNAPSHOTS</span>
       </div>
       <div class="snapshot-list">
@@ -1280,7 +1325,7 @@ function renderIntelligenceAnalysisPage(){
           <h1>开源信息情报</h1>
           <p>围绕关键矿产建立公开情报、执法案例和风险信号的统一分析视图。</p>
         </div>
-        <span class="intel-update">公开来源 · 截至 2026.07.02</span>
+        <span class="intel-update">公开来源 · 截至 2026.07.13</span>
       </header>
       <div class="mineral-selector">
         <button class="mineral-selector-button" id="mineralSelectorButton" type="button" aria-expanded="false" aria-controls="mineralDropdown">
@@ -1683,6 +1728,25 @@ function renderAiAnalysisPage(){
     </header>
 
     ${aiAnalysisMineralSelector(selected)}
+
+    <section class="ai-executive-grid" aria-label="AI研判摘要">
+      <article class="ai-executive-main">
+        <div class="ai-executive-label"><span></span>AI研判摘要</div>
+        <h2>先看结论，再下钻证据</h2>
+        <p>当前专题把“已确认事实、待核线索、排除边界”分层展示，避免把公告生效前交易、贸易救济案件或管制范围外成品误判为出口管制违规。</p>
+        <ul>
+          <li><strong>已确认处罚</strong><span>境内公开案例显示管制生效后存在未申报钨粉夹藏。</span></li>
+          <li><strong>优先核查</strong><span>重点放在中国原产碳化钨粉、供应商缺失和许可证待核记录。</span></li>
+          <li><strong>审慎排除</strong><span>公告生效前记录、成品棒材和贸易救济材料不直接进入违规判断。</span></li>
+        </ul>
+      </article>
+      <article class="ai-executive-side">
+        <span class="ai-pulse-dot"></span>
+        <small>当前判断</small>
+        <strong>高优先调单</strong>
+        <p>先调取原始报关单、许可证、发票和运输单证，再形成企业或物流链条结论。</p>
+      </article>
+    </section>
 
     <section class="ai-evidence-boundary" aria-label="证据边界">
       <strong>证据边界</strong>
