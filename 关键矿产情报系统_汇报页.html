@@ -87,7 +87,7 @@ button{font:inherit;color:inherit}
 .report{display:grid;grid-template-columns:1fr 1.15fr;gap:26px}.doc{height:400px;padding:28px 30px;background:linear-gradient(135deg,rgba(9,52,95,.88),rgba(3,20,43,.9));border:1px solid rgba(37,217,255,.5);box-shadow:16px 14px 0 rgba(0,92,171,.12),var(--shadow);position:relative}.doc::before{content:"AI RESEARCH";position:absolute;right:15px;top:12px;font:10px "Bahnschrift";letter-spacing:.2em;color:rgba(37,217,255,.45)}.doc h3{font-size:23px;margin:26px 0 7px}.doc .line{height:6px;background:rgba(137,194,222,.14);margin:10px 0}.doc .line:nth-of-type(2){width:80%}.doc .line:nth-of-type(3){width:94%}.doc .line:nth-of-type(4){width:65%}.doc-chart{height:100px;margin-top:25px;display:flex;align-items:flex-end;gap:8px}.doc-chart i{flex:1;height:var(--h);background:linear-gradient(var(--cyan),#0d58bb)}
 .values{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.value{padding:24px;border:1px solid rgba(37,217,255,.48);background:linear-gradient(135deg,rgba(8,50,96,.82),rgba(2,18,40,.8));text-align:center}.value .vicon{font-size:34px;color:var(--cyan);margin-bottom:9px}.value h3{font-size:19px}.value p{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.6}.next{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:16px}.next div{padding:9px 12px;border-left:2px solid var(--cyan);background:rgba(5,50,96,.36);font-size:11px;color:#9ac4da}
 .closing{margin-top:20px;padding:13px;text-align:center;border:1px solid rgba(37,217,255,.4);background:linear-gradient(90deg,transparent,rgba(9,83,151,.25),transparent);color:#d9f3ff;font-size:13px;letter-spacing:.04em}
-.chrome{position:fixed;z-index:10;pointer-events:none}.brand{left:32px;top:26px;font-size:11px;letter-spacing:.18em;color:#66bde7}.brand b{color:var(--cyan)}.page-no{right:36px;top:25px;font:700 12px "Bahnschrift";color:#6bbfe9}.page-no b{font-size:19px;color:#e7faff}.progress{left:50%;bottom:22px;transform:translateX(-50%);width:min(380px,40vw);height:2px;background:rgba(34,133,193,.25)}.progress i{display:block;height:100%;width:5.55%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);transition:width .7s var(--ease)}
+.chrome{position:fixed;z-index:10;pointer-events:none}.brand{left:32px;top:26px;font-size:11px;letter-spacing:.18em;color:#66bde7}.brand b{color:var(--cyan)}.page-no{right:36px;top:25px;font:700 12px "Bahnschrift";color:#6bbfe9}.page-no b{font-size:19px;color:#e7faff}.progress{left:50%;bottom:22px;transform:translateX(-50%);width:min(380px,40vw);height:2px;background:rgba(34,133,193,.25)}.progress i{display:block;height:100%;width:5.26%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);transition:width .7s var(--ease)}
 .controls{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:12;display:flex;flex-direction:column;gap:6px}.dotnav{width:7px;height:7px;border:1px solid #1985c9;background:transparent;transform:rotate(45deg);cursor:pointer;transition:.3s}.dotnav.active{background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 9px var(--cyan);transform:rotate(45deg) scale(1.35)}
 .navbtn{position:fixed;z-index:12;bottom:18px;width:30px;height:30px;border:1px solid rgba(37,217,255,.34);background:rgba(3,26,54,.72);cursor:pointer;color:#77ccef}.prev{right:76px}.nextbtn{right:38px}.navbtn:hover{border-color:var(--cyan);color:#fff;box-shadow:0 0 14px rgba(37,217,255,.25)}
 .tip{position:fixed;left:32px;bottom:21px;z-index:10;font-size:10px;color:#477d9d;letter-spacing:.08em}
@@ -104,7 +104,7 @@ button{font:inherit;color:inherit}
 <body>
 <canvas id="network"></canvas><div class="noise"></div>
 <div class="chrome brand"><b>AI INTELLIGENCE</b> · 关键矿产情报采集分析系统</div>
-<div class="chrome page-no"><b id="current">01</b> / 18</div>
+<div class="chrome page-no"><b id="current">01</b> / <span id="total">19</span></div>
 <div class="chrome progress"><i id="progress"></i></div>
 <div class="tip">SCROLL / ↑ ↓ / SPACE　切换页面</div>
 <div class="controls" id="dots"></div>
@@ -292,15 +292,23 @@ button{font:inherit;color:inherit}
   </section>
 
   <section class="slide">
-    <div class="header reveal"><div class="eyebrow">13 · AI DEEP RESEARCH</div><h2 class="title">从研究问题到正式报告的一体化生成</h2><p class="subtitle">AI Agent完成问题拆解、多轮检索、证据分级、交叉核验和报告编排，人工负责审核和最终定稿。</p></div>
+    <div class="header reveal"><div class="eyebrow">13 · AI DEEP RESEARCH</div><h2 class="title">AI深度研究：从复杂问题到可核验结论</h2><p class="subtitle">AI Agent完成问题拆解、多轮检索、证据分级和交叉核验，人工负责审阅关键证据与研究结论。</p></div>
     <div class="report reveal">
-      <div class="doc"><div class="eyebrow">STRATEGIC REPORT</div><h3>关键矿产供应链重构与风险防控研究</h3><p style="font-size:12px;color:var(--muted)">政策演进 · 企业动态 · 贸易路径 · 风险建议</p><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="doc-chart"><i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:47%"></i><i style="--h:75%"></i><i style="--h:88%"></i><i style="--h:66%"></i></div></div>
-      <div><div class="grid g2"><div class="card"><h3><b>3份</b> AI深度研究</h3><p>问题拆解 · 检索计划 · 证据分级 · 交叉核验 · 图表脚注</p></div><div class="card"><h3><b>2份</b> AI战略报告</h3><p>海关要情 · 综合信息呈报 · 课题研究报告</p></div></div><div class="card" style="margin-top:14px"><h3>深度研究工作流</h3><div class="flow" style="margin-top:14px"><div class="step"><b>拆解</b><span>研究问题</span></div><div class="step"><b>检索</b><span>多源资料</span></div><div class="step"><b>核验</b><span>证据分级</span></div><div class="step"><b>编排</b><span>观点图表</span></div><div class="step"><b>审核</b><span>人工定稿</span></div></div></div><div class="card" style="margin-top:14px"><h3>成果覆盖</h3><p><span class="tag">反管制体系</span><span class="tag">供应链重构</span><span class="tag">监管难点</span><span class="tag">风险防控</span><span class="tag">Word / PDF</span><span class="tag">查看 · 下载 · 归档</span></p></div></div>
+      <div class="doc"><div class="eyebrow">DEEP RESEARCH</div><h3>境外关键矿产供应链重构专题研究</h3><p style="font-size:12px;color:var(--muted)">研究问题 · 多轮检索 · 证据分级 · 交叉核验</p><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="doc-chart"><i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:47%"></i><i style="--h:75%"></i><i style="--h:88%"></i><i style="--h:66%"></i></div></div>
+      <div><div class="card"><h3><b>3份</b> AI深度研究成果</h3><p>覆盖反管制体系、供应链重构、监管难点和风险防控等专题。</p></div><div class="card" style="margin-top:14px"><h3>深度研究工作流</h3><div class="flow" style="margin-top:14px"><div class="step"><b>拆解</b><span>研究问题</span></div><div class="step"><b>计划</b><span>制定检索</span></div><div class="step"><b>检索</b><span>多源资料</span></div><div class="step"><b>核验</b><span>证据分级</span></div><div class="step"><b>生成</b><span>观点图表</span></div></div></div><div class="card" style="margin-top:14px"><h3>核心研究能力</h3><p><span class="tag">政府资料</span><span class="tag">海关资料</span><span class="tag">法院文书</span><span class="tag">企业资料</span><span class="tag">实体关系提取</span><span class="tag">事实 / 推断 / 待核实</span><span class="tag">图表与脚注</span></p></div></div>
     </div>
   </section>
 
   <section class="slide">
-    <div class="header reveal"><div class="eyebrow">14 · VALUE & ROADMAP</div><h2 class="title">让信息情报工作从“资料支撑”走向“风险牵引”</h2></div>
+    <div class="header reveal"><div class="eyebrow">14 · AI STRATEGIC REPORT</div><h2 class="title">AI战略报告：从研究成果到正式决策产品</h2><p class="subtitle">把情报、证据、观点和图表编排为规范化报告，人工审核后完成查看、下载和统一归档。</p></div>
+    <div class="report reveal">
+      <div class="doc"><div class="eyebrow">STRATEGIC REPORT</div><h3>关键矿产供应链重构与风险防控研究</h3><p style="font-size:12px;color:var(--muted)">政策演进 · 企业动态 · 贸易路径 · 风险建议</p><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="doc-chart"><i style="--h:48%"></i><i style="--h:64%"></i><i style="--h:55%"></i><i style="--h:82%"></i><i style="--h:70%"></i><i style="--h:92%"></i></div></div>
+      <div><div class="grid g2"><div class="card"><h3><b>2份</b> AI战略报告</h3><p>研究成果已完成正式报告编排并统一归档。</p></div><div class="card"><h3><b>人工</b> 审核定稿</h3><p>AI生成初稿，业务人员审核事实、结论与建议。</p></div></div><div class="card" style="margin-top:14px"><h3>三类标准决策产品</h3><div class="grid g3" style="margin-top:12px"><div class="mini"><b>要情</b><span>海关要情</span></div><div class="mini"><b>呈报</b><span>海关综合信息呈报</span></div><div class="mini"><b>课题</b><span>课题研究报告</span></div></div></div><div class="card" style="margin-top:14px"><h3>报告全流程</h3><div class="flow" style="margin-top:12px"><div class="step"><b>选题</b><span>研究成果</span></div><div class="step"><b>编排</b><span>观点图表</span></div><div class="step"><b>审核</b><span>人工定稿</span></div><div class="step"><b>输出</b><span>Word / PDF</span></div><div class="step"><b>归档</b><span>知识复用</span></div></div></div></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="header reveal"><div class="eyebrow">15 · VALUE & ROADMAP</div><h2 class="title">让信息情报工作从“资料支撑”走向“风险牵引”</h2></div>
     <div class="values reveal">
       <div class="value"><div class="vicon">⌬</div><h3>情报更系统</h3><p>政策、市场、执法、案例和文件统一归集，减少信息孤岛。</p></div>
       <div class="value"><div class="vicon">◎</div><h3>研判更精准</h3><p>通过证据边界、AI分析和路径关联，提高风险识别质量。</p></div>
@@ -314,6 +322,8 @@ button{font:inherit;color:inherit}
 <script>
 const slides=[...document.querySelectorAll('.slide')],deck=document.getElementById('deck'),dots=document.getElementById('dots');
 let index=0,busy=false,touchY=0;
+document.getElementById('total').textContent=slides.length;
+document.getElementById('progress').style.width=`${100/slides.length}%`;
 slides.forEach((_,i)=>{const b=document.createElement('button');b.className='dotnav'+(i===0?' active':'');b.title=`第 ${i+1} 页`;b.onclick=()=>go(i);dots.appendChild(b)});
 function go(n){
   n=Math.max(0,Math.min(slides.length-1,n));if(n===index)return;
