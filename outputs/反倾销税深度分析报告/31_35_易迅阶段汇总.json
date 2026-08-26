@@ -1,0 +1,1049 @@
+{
+  "31_keyword": {
+    "query_meta": {
+      "pages": 2
+    },
+    "raw_rows": 278,
+    "visible_exact_unique": 274,
+    "visible_exact_duplicates": 4,
+    "date_min": "2024-08-14",
+    "date_max": "2026-07-15",
+    "top_data_source": [
+      {
+        "value": "秘鲁",
+        "count": 213
+      },
+      {
+        "value": "美国",
+        "count": 25
+      },
+      {
+        "value": "印度尼西亚",
+        "count": 16
+      },
+      {
+        "value": "越南全港",
+        "count": 11
+      },
+      {
+        "value": "环球提单",
+        "count": 5
+      },
+      {
+        "value": "印度全港",
+        "count": 3
+      },
+      {
+        "value": "菲律宾新版",
+        "count": 1
+      }
+    ],
+    "top_origin": [
+      {
+        "value": "Peru",
+        "count": 213
+      },
+      {
+        "value": "United States",
+        "count": 23
+      },
+      {
+        "value": "Indonesia",
+        "count": 16
+      },
+      {
+        "value": "Vietnam",
+        "count": 11
+      },
+      {
+        "value": "China",
+        "count": 6
+      },
+      {
+        "value": "India",
+        "count": 3
+      },
+      {
+        "value": "Turkey",
+        "count": 1
+      },
+      {
+        "value": "Philippines",
+        "count": 1
+      }
+    ],
+    "top_supplier": [
+      {
+        "value": "SUDAMERICANA DE FIBRAS S.A.",
+        "count": 213
+      },
+      {
+        "value": "LEETEX GARMENT INDONESIA",
+        "count": 13
+      },
+      {
+        "value": "LAVINSTAR AMERICA INC",
+        "count": 11
+      },
+      {
+        "value": "CôNG TY TNHH E.LAND VIệT NAM",
+        "count": 5
+      },
+      {
+        "value": "HEZE QINGLU CLOTHING CO LTD",
+        "count": 5
+      },
+      {
+        "value": "Công ty TNHH May mặc FIRST TEAM Việt Nam",
+        "count": 3
+      },
+      {
+        "value": "SOBEL NETWORK INTERNATIONAL CO IN",
+        "count": 3
+      },
+      {
+        "value": "CôNG TY TNHH THIếT Kế PHụ KIệN THờI TRANG VIệT NAM",
+        "count": 2
+      },
+      {
+        "value": "INDIAN ACRYLICS LIMITED",
+        "count": 2
+      },
+      {
+        "value": "WILLIAM BARNET SON LLC",
+        "count": 2
+      },
+      {
+        "value": "LAVINSTAR AMERICA, INC.",
+        "count": 2
+      },
+      {
+        "value": "SOBEL NETWORK INTERNATIONAL CO., INC.",
+        "count": 2
+      }
+    ],
+    "top_buyer": [
+      {
+        "value": "---",
+        "count": 232
+      },
+      {
+        "value": "GU (SHANGHAI) TRADING CO LTD",
+        "count": 6
+      },
+      {
+        "value": "QIAO YILU CLOTHING",
+        "count": 5
+      },
+      {
+        "value": "ELAND WORLD LTD",
+        "count": 4
+      },
+      {
+        "value": "NORTH EAST ASIA LIMITED",
+        "count": 4
+      },
+      {
+        "value": "NAMESON INDUSTRIAL LIMITED/FAST RETAILING (CHINA) TRADING.CO.,LTD.",
+        "count": 3
+      },
+      {
+        "value": "FAST RETAILING SHANGHAI ENTERPRISE MANAGEMENT CONSULTING CO LTD",
+        "count": 2
+      },
+      {
+        "value": "HEDERA INTERNATIONAL TRADING LIMITED/VIETNAM STYLE FASHION ACCESSORIES",
+        "count": 2
+      },
+      {
+        "value": "SHANGHAI LIN MING CORP.LTD.",
+        "count": 2
+      },
+      {
+        "value": "LavinStar America, Inc.",
+        "count": 2
+      },
+      {
+        "value": "NATIONAL CUSTOM BROKERS& FORWARDERS ASSOCIATION OF AMERICA",
+        "count": 2
+      },
+      {
+        "value": "QINGDAO DONG LIM PLUSH CO LTD",
+        "count": 1
+      }
+    ],
+    "top_hs": [
+      {
+        "value": "5503309000",
+        "count": 210
+      },
+      {
+        "value": "(空)",
+        "count": 28
+      },
+      {
+        "value": "61103000",
+        "count": 12
+      },
+      {
+        "value": "61109000",
+        "count": 4
+      },
+      {
+        "value": "5506300000",
+        "count": 3
+      },
+      {
+        "value": "550330",
+        "count": 2
+      },
+      {
+        "value": "55033090",
+        "count": 2
+      },
+      {
+        "value": "62114390",
+        "count": 2
+      },
+      {
+        "value": "62045300",
+        "count": 2
+      },
+      {
+        "value": "55033000",
+        "count": 1
+      },
+      {
+        "value": "62043300",
+        "count": 1
+      },
+      {
+        "value": "56039400",
+        "count": 1
+      }
+    ],
+    "scope": [
+      {
+        "value": "措施范围候选",
+        "count": 218
+      },
+      {
+        "value": "待规格/税号复核",
+        "count": 56
+      }
+    ]
+  },
+  "32_keyword": {
+    "query_meta": {
+      "tag": "32_keyword",
+      "keyword": "UNBLEACHED SACK KRAFT PAPER",
+      "total": 51
+    },
+    "raw_rows": 51,
+    "visible_exact_unique": 32,
+    "visible_exact_duplicates": 19,
+    "date_min": "2024-08-28",
+    "date_max": "2026-05-27",
+    "top_data_source": [
+      {
+        "value": "美国",
+        "count": 17
+      },
+      {
+        "value": "环球提单",
+        "count": 15
+      }
+    ],
+    "top_origin": [
+      {
+        "value": "Canada",
+        "count": 21
+      },
+      {
+        "value": "United States",
+        "count": 7
+      },
+      {
+        "value": "Sweden",
+        "count": 2
+      },
+      {
+        "value": "Poland",
+        "count": 1
+      },
+      {
+        "value": "Germany",
+        "count": 1
+      }
+    ],
+    "top_supplier": [
+      {
+        "value": "FORTIS TRADING LTD",
+        "count": 21
+      },
+      {
+        "value": "BAY HILL INTERNATIONAL INC",
+        "count": 4
+      },
+      {
+        "value": "BILLERUD SWEDEN AB",
+        "count": 2
+      },
+      {
+        "value": "SIX CONTINENTS LLC",
+        "count": 2
+      },
+      {
+        "value": "FMS SEAWAYS AG AS NVOCC FOR",
+        "count": 1
+      },
+      {
+        "value": "STORA ENSO POLAND S.A.",
+        "count": 1
+      },
+      {
+        "value": "MONDI PAPER SALES GMBH",
+        "count": 1
+      }
+    ],
+    "top_buyer": [
+      {
+        "value": "SHANGHAI YEARICH IMP EXP CO LTD",
+        "count": 16
+      },
+      {
+        "value": "---",
+        "count": 5
+      },
+      {
+        "value": "QINGDAO FUNDERIEF INDUSTRIAL",
+        "count": 3
+      },
+      {
+        "value": "SHANGHAI YEARICH IMP EXP",
+        "count": 2
+      },
+      {
+        "value": "SHANGHAI AILU PACKAGE CO. LTD",
+        "count": 2
+      },
+      {
+        "value": "QINGDAO DEYIN IMP. & EXP. CO. LTD",
+        "count": 2
+      },
+      {
+        "value": "WALKI PACKAGING PAPER (CHANGSHU) CO",
+        "count": 1
+      },
+      {
+        "value": "CP INTERNATIONAL ASIA LTD",
+        "count": 1
+      }
+    ],
+    "top_hs": [
+      {
+        "value": "(空)",
+        "count": 24
+      },
+      {
+        "value": "480421",
+        "count": 7
+      },
+      {
+        "value": "233063",
+        "count": 1
+      }
+    ],
+    "scope": [
+      {
+        "value": "措施范围候选—七项物性待核",
+        "count": 32
+      }
+    ]
+  },
+  "33_hs": {
+    "query_meta": {
+      "tag": "33_hs",
+      "hs": "700220",
+      "total": 34
+    },
+    "raw_rows": 34,
+    "visible_exact_unique": 33,
+    "visible_exact_duplicates": 1,
+    "date_min": "2024-08-23",
+    "date_max": "2026-05-27",
+    "top_data_source": [
+      {
+        "value": "印度全港",
+        "count": 24
+      },
+      {
+        "value": "越南全港",
+        "count": 6
+      },
+      {
+        "value": "印度尼西亚",
+        "count": 1
+      },
+      {
+        "value": "哈萨克斯坦",
+        "count": 1
+      },
+      {
+        "value": "环球提单",
+        "count": 1
+      }
+    ],
+    "top_origin": [
+      {
+        "value": "India",
+        "count": 24
+      },
+      {
+        "value": "Vietnam",
+        "count": 6
+      },
+      {
+        "value": "Indonesia",
+        "count": 1
+      },
+      {
+        "value": "Kazakhstan",
+        "count": 1
+      },
+      {
+        "value": "Germany",
+        "count": 1
+      }
+    ],
+    "top_supplier": [
+      {
+        "value": "N.K.R. INTERNATIONAL",
+        "count": 9
+      },
+      {
+        "value": "CôNG TY TNHH KHOA HọC Và CôNG NGHệ LLD VIệT NAM",
+        "count": 6
+      },
+      {
+        "value": "Ocean International",
+        "count": 6
+      },
+      {
+        "value": "ZTT INDIA PRIVATE LIMITED",
+        "count": 4
+      },
+      {
+        "value": "OCEAN INTERNATIONAL",
+        "count": 3
+      },
+      {
+        "value": "CORNING TECHNOLOGIES INDIA PRIVATE LIMITED",
+        "count": 2
+      },
+      {
+        "value": "PT YANGTZE OPTICAL FIBRE INDONESIA",
+        "count": 1
+      },
+      {
+        "value": "ТОО «UNION CONSULT CO. LTD» П/П TOO“EASTERN HEMIESPHERE RESOURSE RECYCLING\"",
+        "count": 1
+      },
+      {
+        "value": "LOGWIN AIR + OCEAN DEUTSCHLAND GMBH",
+        "count": 1
+      }
+    ],
+    "top_buyer": [
+      {
+        "value": "BEIJING AUSPICIOUS SIGN",
+        "count": 12
+      },
+      {
+        "value": "ZHONGTIAN TECHNOLOGY ADVANCED",
+        "count": 4
+      },
+      {
+        "value": "NAME:DONGGUAN QUANTONG SUPPLY",
+        "count": 4
+      },
+      {
+        "value": "DONGHAI JUNHENG QUARTZ PRODUCTS CO., LTD",
+        "count": 3
+      },
+      {
+        "value": "CORNING (HAINAN) OPTICAL COMMUNICA",
+        "count": 2
+      },
+      {
+        "value": "JIAXING TENGZHAN TECHNOLOGY CO.,LTD",
+        "count": 1
+      },
+      {
+        "value": "HAINING MAX OPTICS COMPANY LTD.",
+        "count": 1
+      },
+      {
+        "value": "YANGTZE OPTICAL FIBREANDCABLE JOINT STOCK LTD COMPANY",
+        "count": 1
+      },
+      {
+        "value": "BEIJING AUSPICIOUS SIGNINTERNATIONAL TRADING CO LTD",
+        "count": 1
+      },
+      {
+        "value": "BEIJING AUSPICIOUS SIGN INTERNATI",
+        "count": 1
+      },
+      {
+        "value": "RONG LI DA INTERNATIONAL CO LTD",
+        "count": 1
+      },
+      {
+        "value": "ООО «НАУЧНО-ТЕХНИЧЕСКАЯ КОРПОРАЦИЯ ПО ЗАЩИТЕ ОКРУЖАЮЩЕЙ СРЕДЫ «БО ФАН» ПРОВИНЦИИ ГУАНДУН",
+        "count": 1
+      }
+    ],
+    "top_hs": [
+      {
+        "value": "70022090",
+        "count": 24
+      },
+      {
+        "value": "70022000",
+        "count": 7
+      },
+      {
+        "value": "7002209000",
+        "count": 1
+      },
+      {
+        "value": "700220",
+        "count": 1
+      }
+    ],
+    "scope": [
+      {
+        "value": "石英/玻璃棒待用途与直径复核",
+        "count": 16
+      },
+      {
+        "value": "同HS其他/待核",
+        "count": 13
+      },
+      {
+        "value": "光纤预制棒候选—直径待核",
+        "count": 4
+      }
+    ]
+  },
+  "34_keyword": {
+    "query_meta": {
+      "tag": "34_keyword",
+      "keyword": "POLYSILICON",
+      "total": 18
+    },
+    "raw_rows": 18,
+    "visible_exact_unique": 13,
+    "visible_exact_duplicates": 5,
+    "date_min": "2024-08-20",
+    "date_max": "2025-09-27",
+    "top_data_source": [
+      {
+        "value": "独联体",
+        "count": 4
+      },
+      {
+        "value": "美国",
+        "count": 3
+      },
+      {
+        "value": "环球提单",
+        "count": 3
+      },
+      {
+        "value": "越南全港",
+        "count": 2
+      },
+      {
+        "value": "印度全港",
+        "count": 1
+      }
+    ],
+    "top_origin": [
+      {
+        "value": "United States",
+        "count": 6
+      },
+      {
+        "value": "Vietnam",
+        "count": 2
+      },
+      {
+        "value": "Sweden",
+        "count": 2
+      },
+      {
+        "value": "Germany",
+        "count": 2
+      },
+      {
+        "value": "India",
+        "count": 1
+      }
+    ],
+    "top_supplier": [
+      {
+        "value": "SEA TRADE INTERNATIONAL INCORPORATE",
+        "count": 3
+      },
+      {
+        "value": "SEA TRADE ENTERPRISES CANADA INC.",
+        "count": 3
+      },
+      {
+        "value": "NOURYON PULP&PERFORMANCE CHEMICALS AB",
+        "count": 2
+      },
+      {
+        "value": "BELINTERTRANS GERMANY GMBH",
+        "count": 2
+      },
+      {
+        "value": "CôNG TY TNHH Kỹ THUậT Tự ĐộNG HóA LIHUA VIệT NAM",
+        "count": 1
+      },
+      {
+        "value": "CôNG TY TNHH CôNG NGHệ RUNERGY PV (VIệT NAM)",
+        "count": 1
+      },
+      {
+        "value": "ADANI NEW INDUSTRIES LIMITED",
+        "count": 1
+      }
+    ],
+    "top_buyer": [
+      {
+        "value": "NOURYON CHEMICALS (GUANGZHOU) CO LTD",
+        "count": 4
+      },
+      {
+        "value": "---",
+        "count": 3
+      },
+      {
+        "value": "SEA TRADE INTERNATIONAL INCORPORATED",
+        "count": 2
+      },
+      {
+        "value": "CHONGQING LIHUA AUTOMATIC TECHNOLOGY CO.,LTD.",
+        "count": 1
+      },
+      {
+        "value": "SHANGHAI MINGYAO NEW ENERGY TECHNOLOGY CO.,LTD",
+        "count": 1
+      },
+      {
+        "value": "INNER MONGOLIA DAQO NEW ENERGY",
+        "count": 1
+      },
+      {
+        "value": "Sea Trade International Incorporated",
+        "count": 1
+      }
+    ],
+    "top_hs": [
+      {
+        "value": "382499",
+        "count": 4
+      },
+      {
+        "value": "(空)",
+        "count": 3
+      },
+      {
+        "value": "280461",
+        "count": 3
+      },
+      {
+        "value": "85412900",
+        "count": 1
+      },
+      {
+        "value": "28046100",
+        "count": 1
+      },
+      {
+        "value": "28046900",
+        "count": 1
+      }
+    ],
+    "scope": [
+      {
+        "value": "多晶硅候选—太阳能级待核",
+        "count": 13
+      }
+    ]
+  },
+  "34_hs": {
+    "query_meta": {
+      "tag": "34_hs",
+      "hs": "280461",
+      "total": 18
+    },
+    "raw_rows": 18,
+    "visible_exact_unique": 14,
+    "visible_exact_duplicates": 4,
+    "date_min": "2024-08-25",
+    "date_max": "2026-06-26",
+    "top_data_source": [
+      {
+        "value": "越南全港",
+        "count": 8
+      },
+      {
+        "value": "环球提单",
+        "count": 4
+      },
+      {
+        "value": "印度尼西亚",
+        "count": 1
+      },
+      {
+        "value": "俄罗斯",
+        "count": 1
+      }
+    ],
+    "top_origin": [
+      {
+        "value": "Vietnam",
+        "count": 8
+      },
+      {
+        "value": "United States",
+        "count": 3
+      },
+      {
+        "value": "Indonesia",
+        "count": 1
+      },
+      {
+        "value": "Germany",
+        "count": 1
+      },
+      {
+        "value": "China",
+        "count": 1
+      }
+    ],
+    "top_supplier": [
+      {
+        "value": "CôNG TY TNHH CôNG NGHIệP JINKO SOLAR (VIệT NAM)",
+        "count": 5
+      },
+      {
+        "value": "SEA TRADE ENTERPRISES CANADA INC.",
+        "count": 3
+      },
+      {
+        "value": "CôNG TY TNHH TRINA SOLAR WAFER (VIET NAM)",
+        "count": 2
+      },
+      {
+        "value": "PT NUSA SOLAR INDONESIA",
+        "count": 1
+      },
+      {
+        "value": "WACKER CHEMIE AG",
+        "count": 1
+      },
+      {
+        "value": "CôNG TY TNHH CôNG NGHệ RUNERGY PV (VIệT NAM)",
+        "count": 1
+      },
+      {
+        "value": "ООО ТК \"ОПОРА\"",
+        "count": 1
+      }
+    ],
+    "top_buyer": [
+      {
+        "value": "SHANGRAO JINKOSOLAR INTELLIGENT MANUFACTURING CO. LTD",
+        "count": 5
+      },
+      {
+        "value": "SEA TRADE INTERNATIONAL INCORPORATED",
+        "count": 2
+      },
+      {
+        "value": "HENGDIAN GROUP DMEGC MAGNETICS CO LTD",
+        "count": 1
+      },
+      {
+        "value": "TRINA SOLAR CO,.LTD",
+        "count": 1
+      },
+      {
+        "value": "YICHANG CSG POLYSILICON CO., LTD",
+        "count": 1
+      },
+      {
+        "value": "FERROTEC (NINGXIA) SEMICONDUCTOR CO., LTD.",
+        "count": 1
+      },
+      {
+        "value": "SHANGHAI MINGYAO NEW ENERGY TECHNOLOGY CO.,LTD",
+        "count": 1
+      },
+      {
+        "value": "TIANJIN WHATAEWOO CO., LTD.",
+        "count": 1
+      },
+      {
+        "value": "Sea Trade International Incorporated",
+        "count": 1
+      }
+    ],
+    "top_hs": [
+      {
+        "value": "28046100",
+        "count": 9
+      },
+      {
+        "value": "280461",
+        "count": 4
+      },
+      {
+        "value": "2804610000",
+        "count": 1
+      }
+    ],
+    "scope": [
+      {
+        "value": "高纯硅同税号—用途待核",
+        "count": 9
+      },
+      {
+        "value": "多晶硅候选—太阳能级待核",
+        "count": 5
+      }
+    ]
+  },
+  "34_cross_query": {
+    "keyword_unique": 13,
+    "hs_unique": 14,
+    "intersection": 4,
+    "union": 23,
+    "keyword_only": 9,
+    "hs_only": 10
+  },
+  "35_targeted": {
+    "query_scope": {
+      "date": "2024-08-14~2026-08-14",
+      "destination": "China",
+      "queries": [
+        {
+          "product": "CARBON STEEL BOLT",
+          "total": 20
+        },
+        {
+          "product": "CARBON STEEL SCREW",
+          "total": 11
+        },
+        {
+          "product": "CARBON STEEL WASHER",
+          "total": 12
+        },
+        {
+          "supplier": "KAMAX GMBH",
+          "hs": "731815",
+          "total": 0
+        },
+        {
+          "supplier": "KAMAX S.L.U",
+          "hs": "731815",
+          "total": 0
+        },
+        {
+          "supplier": "NEDSCHROEF FASTENERS",
+          "hs": "731815",
+          "total": 0
+        },
+        {
+          "origin": "UNITED KINGDOM",
+          "hs": "731815",
+          "total": 0
+        }
+      ]
+    },
+    "raw_rows": 43,
+    "visible_exact_unique": 42,
+    "visible_exact_duplicates": 1,
+    "top_origin": [
+      {
+        "value": "India",
+        "count": 30
+      },
+      {
+        "value": "Vietnam",
+        "count": 7
+      },
+      {
+        "value": "Indonesia",
+        "count": 3
+      },
+      {
+        "value": "China",
+        "count": 1
+      },
+      {
+        "value": "United States",
+        "count": 1
+      }
+    ],
+    "top_supplier": [
+      {
+        "value": "KRISHNA ENTERPRISES",
+        "count": 15
+      },
+      {
+        "value": "VINYAS INNOVATIVE TECHNOLOGIES LIMITED",
+        "count": 12
+      },
+      {
+        "value": "CôNG TY TNHH GIA CôNG SảN XUấT Cơ KHí NGũ KIM SUNLUEN VIệT NAM",
+        "count": 4
+      },
+      {
+        "value": "ARMSTRONG INTERNATIONAL PRIVATE LIMITED",
+        "count": 3
+      },
+      {
+        "value": "MEILOON TECHNOLOGY INDONESIA",
+        "count": 3
+      },
+      {
+        "value": "CôNG TY TNHH KHOA HọC Kỹ THUậT AVC (VIệT NAM)",
+        "count": 1
+      },
+      {
+        "value": "SHAANXI LASTING NEW MATERIAL INDUST",
+        "count": 1
+      },
+      {
+        "value": "CôNG TY TNHH INTEL PRODUCTS VIệT NAM",
+        "count": 1
+      },
+      {
+        "value": "ECU WORLDWIDE USA INC",
+        "count": 1
+      },
+      {
+        "value": "CôNG TY TNHH TECHTRONIC TOOLS (VIệT NAM)",
+        "count": 1
+      }
+    ],
+    "top_buyer": [
+      {
+        "value": "WENZHOU FENGDING FASTENER MANUFACT",
+        "count": 15
+      },
+      {
+        "value": "FRESENIUS KABI (NANCHANG) CO., LTD",
+        "count": 12
+      },
+      {
+        "value": "JOY PROSPER ENTERPRISE COMPANY LIMITED/TTI PARTNERS SPC",
+        "count": 4
+      },
+      {
+        "value": "DONGGUAN MEILOON ACOUSTIC EQUIPMENTS CO LTD",
+        "count": 3
+      },
+      {
+        "value": "ARMSTRONG MACHINERY (CHINA) CO.,LTD",
+        "count": 2
+      },
+      {
+        "value": "ARMSTRONG MACHINERY (CHINA) CO.LTD",
+        "count": 1
+      },
+      {
+        "value": "ASIA VITAL COMPONENTS (DONGGUAN) CO., LTD",
+        "count": 1
+      },
+      {
+        "value": "SHAANXI LASTING NEW MATERIAL INDUST",
+        "count": 1
+      },
+      {
+        "value": "INTEL PRODUCTS CHENGDU",
+        "count": 1
+      },
+      {
+        "value": "---",
+        "count": 1
+      },
+      {
+        "value": "TTI PARTNERS SPC ACTING FOR THE ACCOUNT OF MPV SP",
+        "count": 1
+      }
+    ],
+    "top_hs": [
+      {
+        "value": "73181500",
+        "count": 15
+      },
+      {
+        "value": "90330000",
+        "count": 12
+      },
+      {
+        "value": "73182200",
+        "count": 5
+      },
+      {
+        "value": "84818030",
+        "count": 3
+      },
+      {
+        "value": "85189090",
+        "count": 3
+      },
+      {
+        "value": "(空)",
+        "count": 2
+      },
+      {
+        "value": "73181610",
+        "count": 1
+      },
+      {
+        "value": "84834090",
+        "count": 1
+      }
+    ],
+    "scope": [
+      {
+        "value": "措施范围候选—原产地/尺寸待核",
+        "count": 20
+      },
+      {
+        "value": "范围外候选（杆径不超过6毫米）",
+        "count": 8
+      },
+      {
+        "value": "范围待核",
+        "count": 8
+      },
+      {
+        "value": "范围外（其他货物或总成）",
+        "count": 5
+      },
+      {
+        "value": "范围外（螺母）",
+        "count": 1
+      }
+    ]
+  }
+}

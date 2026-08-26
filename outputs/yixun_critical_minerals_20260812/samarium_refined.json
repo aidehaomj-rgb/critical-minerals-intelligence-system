@@ -1,0 +1,62 @@
+{
+  "mineral": "钐",
+  "term": "SAMARIUM OXIDE",
+  "scope": "页面显示日期：2026-01-01 ~ 2026-08-06；原产国/地区=CHINA",
+  "checkedAt": "2026-08-12T09:51:21.102Z",
+  "total": 3,
+  "reviewedRows": 3,
+  "coverage": "页面结果全量",
+  "validation": {
+    "termTag": true,
+    "chinaTag": true,
+    "dateValue": "2026-01-01 ~ 2026-08-06",
+    "firstDescription": "Hoá chất SAMARIUM(III) OXIDE;là hợp chất của kim loại đất hiếm,dùng cho nghiên cứu phân tích,sử dụng trong PTN,sản xuất hóa chất,10G/CHAI,CAS 12060-58-1"
+  },
+  "rows": [
+    [
+      "越南全港",
+      "进口",
+      "2026-06-03",
+      "28469000",
+      "Hoá chất SAMARIUM(III) OXIDE;là hợp chất của kim loại đất hiếm,dùng cho nghiên cứu phân tích,sử dụng trong PTN,sản xuất hóa chất,10G/CHAI,CAS 12060-58-1",
+      "CôNG TY TNHH MERCK VIệT NAM",
+      "SIGMA ALDRICH INTERNATIONAL GMBH",
+      "",
+      "1.00",
+      "1206724.00",
+      "Vietnam",
+      "China",
+      "收藏"
+    ],
+    [
+      "越南全港",
+      "进口",
+      "2026-05-05",
+      "28469000",
+      "Hoá chất SAMARIUM(III) OXIDE;là hợp chất của kim loại đất hiếm,dùng cho nghiên cứu phân tích,sử dụng trong PTN,sản xuất hóa chất,10g/CHAI,CAS 12060-58-1",
+      "CôNG TY TNHH MERCK VIệT NAM",
+      "SIGMA ALDRICH INTERNATIONAL GMBH",
+      "",
+      "1.00",
+      "1206724.00",
+      "Vietnam",
+      "China",
+      "收藏"
+    ],
+    [
+      "越南全港",
+      "进口",
+      "2026-03-07",
+      "28469000",
+      "Hoá chất Samarium(III) oxide;là hợp chất của kim loại đất hiếm,dùng cho nghiên cứu phân tích,sử dụng trong phòng thí nghiệm,sản xuất hóa chất,10 G/LỌ,CAS 12060-58-1",
+      "CôNG TY TNHH MERCK VIệT NAM",
+      "MERCK LIFE SCIENCE KGAA",
+      "",
+      "1.00",
+      "1340261.00",
+      "Vietnam",
+      "China",
+      "收藏"
+    ]
+  ]
+}

@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="关键矿产情报采集分析系统" />
     <title>关键矿产情报采集分析系统</title>
-  <link rel="stylesheet" href="./styles.css?v=20260705-vibrant-modules-v2" />
-  <link rel="stylesheet" href="./visual-recovery.css?v=20260705-vibrant-modules-v2" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./styles.css?v=20260808-global-map-v10" />
+  <link rel="stylesheet" href="./visual-recovery.css?v=20260808-global-map-v10" />
   </head>
   <body>
     <div class="app-shell">
@@ -29,6 +30,9 @@
           </a>
           <a href="#/minerals" data-route="minerals">
             <span class="nav-icon">●</span><span>关键矿产态势</span>
+          </a>
+          <a href="#/global-situation" data-route="global-situation">
+            <span class="nav-icon">◎</span><span>全球态势</span>
           </a>
           <a href="#/intelligence-analysis" data-route="intelligence-analysis">
             <span class="nav-icon">◉</span><span>开源信息情报</span>
@@ -66,7 +70,7 @@
         <div class="sidebar-foot">
           <div class="data-status">
             <span class="status-light"></span>
-            <div><strong>数据已同步</strong><small>截至 2026.07.02</small></div>
+            <div><strong>数据已同步</strong><small>截至 2026.08.08</small></div>
           </div>
           <a href="#/settings" data-route="settings">
             <span class="nav-icon">⚙</span><span>系统设置</span>
@@ -110,9 +114,10 @@
     </div>
 
     <div class="mobile-mask" id="mobileMask"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
     <script src="./announcement-items.js"></script>
     <script src="./intelligence-snapshots.js"></script>
     <script src="./library-index.js"></script>
-    <script src="./app.js?v=20260705-vibrant-modules-v2"></script>
+    <script src="./app.js?v=20260813-yixun-report-v1"></script>
   </body>
 </html>

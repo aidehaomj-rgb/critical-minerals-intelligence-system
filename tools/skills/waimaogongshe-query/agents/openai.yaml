@@ -1,0 +1,6 @@
+interface:
+  display_name: "外贸公社查询"
+  short_description: "查询外贸公社贸易数据并标准化导出结果"
+  default_prompt: "Use $waimaogongshe-query to query 外贸公社 trade records and export a standardized Excel summary."
+policy:
+  allow_implicit_invocation: true

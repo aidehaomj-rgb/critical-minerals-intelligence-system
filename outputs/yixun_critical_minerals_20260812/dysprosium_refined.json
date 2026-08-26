@@ -1,0 +1,77 @@
+{
+  "mineral": "镝",
+  "term": "DYSPROSIUM OXIDE",
+  "scope": "页面显示日期：2026-01-01 ~ 2026-08-06；原产国/地区=CHINA",
+  "checkedAt": "2026-08-12T10:04:43.974Z",
+  "total": 4,
+  "reviewedRows": 4,
+  "coverage": "页面结果全量",
+  "validation": {
+    "termTag": true,
+    "chinaTag": true,
+    "dateValue": "2026-01-01 ~ 2026-08-06",
+    "firstDescription": "Hoá chất Dysprosium(III) oxide,là hợp chất vô cơ của kim loại đất hiếm dyprosi,dùng trong nghiên cứu phân tích,sử dụng trong phòng thí nghiệm,sản xuất hoá chất,5g/CHAI,CAS 1308-87-8"
+  },
+  "rows": [
+    [
+      "越南全港",
+      "进口",
+      "2026-06-02",
+      "28469000",
+      "Hoá chất Dysprosium(III) oxide,là hợp chất vô cơ của kim loại đất hiếm dyprosi,dùng trong nghiên cứu phân tích,sử dụng trong phòng thí nghiệm,sản xuất hoá chất,5g/CHAI,CAS 1308-87-8",
+      "CôNG TY TNHH MERCK VIệT NAM",
+      "SIGMA ALDRICH INTERNATIONAL GMBH",
+      "",
+      "1.00",
+      "1986344.00",
+      "Vietnam",
+      "China",
+      "收藏"
+    ],
+    [
+      "越南全港",
+      "进口",
+      "2026-05-29",
+      "28469000",
+      "Hoá chất Dysprosium(III) oxide,>=99.99% gốc kim loại,là hợp chất vô cơ của kim loại đất hiếm, sử dụng trong phòng thí nghiệm, sản xuất hóa chất,1X25g/LỌ,CAS 1308-87-8",
+      "CôNG TY TNHH MERCK VIệT NAM",
+      "SIGMA ALDRICH INTERNATIONAL GMBH",
+      "",
+      "1.00",
+      "6943287.00",
+      "Vietnam",
+      "China",
+      "收藏"
+    ],
+    [
+      "越南全港",
+      "进口",
+      "2026-04-17",
+      "32064990",
+      "BN01#&M14111, Bột nhũ màu xanh lá cây dùng để trang trí móng tay TP: Alminated strontium 12004-37-4; Europium Oxide 12770-85-3; Dysprosium Oxide 1308-87-8; mới 100%",
+      "CôNG TY TNHH PRETTY VINA",
+      "PRETTY ASIA LIMITED",
+      "",
+      "5.00",
+      "6241963.00",
+      "Vietnam",
+      "China",
+      "收藏"
+    ],
+    [
+      "越南全港",
+      "进口",
+      "2026-02-28",
+      "28469000",
+      "Hóa chất Dysprosium(III) oxide, là hợp chất vô cơ của kim loại đất hiếm dyprosi, dùng trong nghiên cứu phân tích, sử dụng trong phòng thí nghiệm, sản xuất hoá chất, 5g/CHAI, CAS 1308-87-8",
+      "CôNG TY TNHH MERCK VIệT NAM",
+      "SIGMA ALDRICH INTERNATIONAL GMBH",
+      "",
+      "1.00",
+      "2391199.00",
+      "Vietnam",
+      "China",
+      "收藏"
+    ]
+  ]
+}

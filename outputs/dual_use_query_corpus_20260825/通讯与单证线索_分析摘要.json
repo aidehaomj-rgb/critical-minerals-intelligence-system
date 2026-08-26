@@ -1,0 +1,64 @@
+{
+  "source_pages": 1686,
+  "source_cases": 150,
+  "email_evidence_pages": 37,
+  "unique_emails": 45,
+  "unique_domains": 34,
+  "cases_with_email": 26,
+  "evidence_email_occurrence_counts": {
+    "A": 12,
+    "B": 3,
+    "C": 16,
+    "D": 24
+  },
+  "evidence_page_counts": {
+    "A": 1,
+    "B": 2,
+    "C": 12,
+    "D": 22
+  },
+  "complete_email_header_or_body_count": 1,
+  "note": "A-level pages contain recognizable sender/recipient fields and message text, but may still be partial exports. B-level evidence is mailbox/attachment provenance only and must not be represented as a complete email message.",
+  "cross_case_emails": [
+    {
+      "email": "anais.ji@vipercarbide.com",
+      "domain": "vipercarbide.com",
+      "case_count": 2,
+      "case_ids": "GDRM26-142;GDRM26-144",
+      "document_count": 2,
+      "evidence_levels": "D",
+      "evidence_types": "SDS、检测或技术文件的联系邮箱"
+    },
+    {
+      "email": "clu@cpsl.com.hk",
+      "domain": "cpsl.com.hk",
+      "case_count": 2,
+      "case_ids": "GDRM26-050;GDRM26-189",
+      "document_count": 2,
+      "evidence_levels": "A;B",
+      "evidence_types": "带发件人、收件人和正文的邮件通讯记录;邮箱界面或邮件附件来源痕迹（不等于完整邮件正文）"
+    },
+    {
+      "email": "public@chinasdg.cn",
+      "domain": "chinasdg.cn",
+      "case_count": 2,
+      "case_ids": "GDRM26-010;GDRM26-322",
+      "document_count": 3,
+      "evidence_levels": "D",
+      "evidence_types": "其他业务文件中的联系邮箱"
+    }
+  ],
+  "description_guarantee_cases": [
+    "GDRM26-144"
+  ],
+  "licence_assertion_cases": [
+    "GDRM26-144",
+    "GDRM26-008",
+    "GDRM26-074"
+  ],
+  "output_files": [
+    "C:\\Users\\59809\\Documents\\关键矿产\\outputs\\dual_use_query_corpus_20260825\\通讯线索_页级证据.csv",
+    "C:\\Users\\59809\\Documents\\关键矿产\\outputs\\dual_use_query_corpus_20260825\\通讯线索_邮箱与案件索引.csv",
+    "C:\\Users\\59809\\Documents\\关键矿产\\outputs\\dual_use_query_corpus_20260825\\单证与申报异常_案件级提示.csv"
+  ]
+}

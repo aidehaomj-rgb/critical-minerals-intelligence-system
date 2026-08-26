@@ -1,5 +1,23 @@
 window.intelligenceSnapshots = [
   {
+    id:"inl-antimony-pilot-2026",mineral:"antimony",sourceLanguage:"en",sourcePublished:"2026-07-30",collectedAt:"2026-08-08",sourceName:"Idaho National Laboratory",sourceUrl:"https://inl.gov/news-release/inl-hosts-ribbon-cutting-for-pilot-plant-supporting-domestic-antimony-production/",titleZh:"美国启用锑分离试验厂，开始验证Stibnite矿石处理路线",category:"代表性项目",translationStatus:"已翻译",summaryZh:"美国爱达荷国家实验室启用锑分离试验设施，初期将处理Perpetua Resources的Stibnite项目矿石，用于表征和分离运行验证。该节点属于试验和工艺放大，不等同于稳定商业供给。",sectionsZh:[{title:"项目阶段",body:"试验设施已启用，重点是获取矿石表征、分离和运行数据。"},{title:"研判边界",body:"公开信息没有证明已形成规模化锑产品产量，页面不将其计为商业替代供应。"}],factsZh:["设施于2026年7月30日公开启用。","初期原料来自Stibnite Gold Project。","当前属于试验验证阶段。"]
+  },
+  {
+    id:"doe-germanium-isotope-2026",mineral:"germanium",sourceLanguage:"en",sourcePublished:"2026-07-16",collectedAt:"2026-08-08",sourceName:"U.S. Department of Energy",sourceUrl:"https://www.energy.gov/science/articles/silencing-noise-doe-unveils-breakthrough-domestic-silicon-and-germanium-isotope",titleZh:"美国披露高纯锗烷和稳定锗同位素生产能力进展",category:"技术与供应",translationStatus:"已翻译",summaryZh:"美国能源部披露ORNL与PNNL在高纯锗烷及稳定锗同位素供应方面取得进展，服务量子信息科研。该能力属于特定同位素和科研材料，不等同于常规金属锗、锗镜片或红外材料产能。",sectionsZh:[{title:"技术方向",body:"重点是降低同位素污染并提供量子科研需要的高纯物理形态。"},{title:"供应链含义",body:"反映美国在高端锗材料环节补链，但不能替代常规锗产品市场数据。"}],factsZh:["公开日期为2026年7月16日。","涉及ORNL与PNNL。","用途聚焦量子信息科学。"]
+  },
+  {
+    id:"jogmec-wagerup-gallium-fid-2026",mineral:"gallium",sourceLanguage:"ja",sourcePublished:"2026-07-15",collectedAt:"2026-08-08",sourceName:"JOGMEC",sourceUrl:"https://www.jogmec.go.jp/news/release/release_01306.html",titleZh:"西澳Wagerup镓项目作出最终投资决定",category:"代表性项目",translationStatus:"已翻译",summaryZh:"JOGMEC披露，与双日、美澳政府机构及Alcoa共同推进的西澳Wagerup氧化铝精炼厂镓生产项目已作出最终投资决定。项目进入建设实施阶段，但尚未形成商业产量。",sectionsZh:[{title:"项目路径",body:"依托既有氧化铝精炼流程回收副产镓，再进入精制和客户认证。"},{title:"进度口径",body:"最终投资决定说明投资条件已满足，不等同于装置已投产。"}],factsZh:["JOGMEC于2026年7月15日发布信息。","项目位于西澳Wagerup氧化铝精炼厂。","当前状态为最终投资决定。"]
+  },
+  {
+    id:"canada-matawinie-graphite-2026",mineral:"graphite",sourceLanguage:"en",sourcePublished:"2026-05-19",collectedAt:"2026-08-08",sourceName:"Government of Canada",sourceUrl:"https://www.canada.ca/en/privy-council/major-projects-office/projects/national/nouveau-monde.html",titleZh:"加拿大Matawinie石墨矿启动建设并形成政府承购安排",category:"代表性项目",translationStatus:"已翻译",summaryZh:"加拿大重大项目办公室披露Matawinie项目启动建设，并形成每年3万吨石墨精矿的政府承购安排。矿山和精矿进展不等同于球化、提纯、包覆和电池客户认证已经完成。",sectionsZh:[{title:"建设节点",body:"项目于2026年5月公布启动建设。"},{title:"承购安排",body:"政府承购安排为每年3万吨石墨精矿，仍需跟踪实际交付。"}],factsZh:["项目已进入建设阶段。","承购对象为石墨精矿。","负极材料全链条仍需下游加工。"]
+  },
+  {
+    id:"finland-keliber-lithium-2026",mineral:"lithium",sourceLanguage:"en",sourcePublished:"2026-05-04",collectedAt:"2026-08-08",sourceName:"Finnish Government",sourceUrl:"https://valtioneuvosto.fi/en/-/state-to-inject-eur-40-million-in-capital-into-finnish-minerals-group-for-ramp-up-of-keliber-lithium-project",titleZh:"芬兰追加资本支持Keliber一体化锂项目爬坡",category:"代表性项目",translationStatus:"已翻译",summaryZh:"芬兰政府决定向Finnish Minerals Group注资4000万欧元，用于Keliber锂矿—精炼一体化项目爬坡。实际产量、产品质量和商业交付仍须以后续运营披露为准。",sectionsZh:[{title:"项目定位",body:"Keliber覆盖矿山到精炼环节。"},{title:"进度边界",body:"政府注资用于爬坡，不代表项目已经稳定达产。"}],factsZh:["芬兰政府于2026年5月4日公布注资决定。","注资规模为4000万欧元。","项目目标为一体化锂生产。"]
+  },
+  {
+    id:"northmet-nickel-cobalt-update-2026",mineral:"nickel",sourceLanguage:"en",sourcePublished:"2026-07-29",collectedAt:"2026-08-08",sourceName:"Minnesota Department of Natural Resources",sourceUrl:"https://www.dnr.state.mn.us/lands_minerals/new-range/index.html",titleZh:"美国NorthMet铜镍钴项目提交设计调整",category:"代表性项目",translationStatus:"已翻译",summaryZh:"明尼苏达自然资源部门披露，NewRange于2026年7月29日提交NorthMet项目设计调整。该项目仍处方案和许可推进阶段，不能作为已形成商业镍钴供给展示。",sectionsZh:[{title:"涉及矿产",body:"项目规划涉及铜、镍、钴及铂族金属。"},{title:"当前状态",body:"设计调整需要继续经过监管和许可程序。"}],factsZh:["设计调整于2026年7月29日提交。","项目位于明尼苏达州。","尚未形成商业供给。"]
+  },
+  {
     id: "mofcom-tungsten-controls-2025",
     mineral: "tungsten",
     sourceLanguage: "zh-CN",
@@ -182,12 +200,12 @@ window.intelligenceSnapshots = [
     sourceLanguage: "zh-CN",
     sourcePublished: "2026-07",
     collectedAt: "2026-07-13",
-    sourceName: "开源贸易数据交叉研判",
+    sourceName: "人工研判（K-Stat 查询入口）",
     sourceUrl: "https://stat.kita.net/",
-    titleZh: "中国对韩碳化钨放量后的日韩转售风险",
+    titleZh: "中韩日碳化钨链条异常核验框架（人工研判）",
     category: "贸易流向",
     translationStatus: "人工研判",
-    summaryZh: "中国对韩国碳化钨出口快速增长，应与韩国进口统计、韩国对日出口统计、日本进口统计及企业产能进行交叉验证。若韩国进口量显著高于本土硬质合金消化能力，且对日粉体出口同步回升，则需关注韩国作为中转和再分销节点的可能性。",
+    summaryZh: "本条不陈述具体贸易增长事实，仅提供核验框架：如发现中国对韩碳化钨出口异常，应与韩国进口、韩国对日出口、日本进口及企业产能进行交叉验证，再判断是否存在中转或再分销线索。",
     sectionsZh: [
       {title:"数据入口",body:"韩国公开贸易统计可通过韩国贸易协会K-Stat、韩国关税厅贸易统计等入口交叉核验。分析时应区分官方汇总统计、商业报关明细和行业估算，避免把第三方台账直接表述为官方结论。"},
       {title:"异常链条",body:"若出现中国对韩碳化钨粉体放量、韩国本土产能难以完全消化、韩国对日同类粉体出口同步回升，便可形成中韩日链条式异常线索。该线索可以支持重点核查，但不能单独证明违法转售。"},
@@ -207,12 +225,12 @@ window.intelligenceSnapshots = [
     sourceLanguage: "zh-CN",
     sourcePublished: "2026-07",
     collectedAt: "2026-07-13",
-    sourceName: "出口管制合规研判",
+    sourceName: "人工研判（参考官方识别问答）",
     sourceUrl: "https://exportcontrol.mofcom.gov.cn/article/cjwt/202503/1112.html",
-    titleZh: "钨粉、碳化钨粉最终用户与最终用途监管要点",
+    titleZh: "钨相关物项最终用户与最终用途核验要点（人工研判）",
     category: "合规识别",
     translationStatus: "人工研判",
-    summaryZh: "钨粉属于两用物项，特定碳化钨及未烧结金属碳化钨也在管制识别范围内。对韩国等第三国出口时，监管重点在于最终用户、最终用途、再出口承诺和中国出口商是否知道或应当知道真实流向。",
+    summaryZh: "本条以官方物项识别问答为依据，提出最终用户、最终用途和再出口安排的核验框架；其中韩国等第三国场景属于人工研判，不应被视为官方网页的直接结论。",
     sectionsZh: [
       {title:"物项边界",body:"商务部、海关总署2025年第10号公告列明钨相关材料、特定固态钨、钨合金和相关生产技术。官方问答进一步明确，仲钨酸铵、氧化钨、碳化钨与其他物项形成的简单混合物，以及未烧结金属碳化钨，均属于相关管制范围。"},
       {title:"最终用户",body:"出口申请和合规审查应核验境外买方是否为真实使用方，是否只是贸易中间商或仓储节点，是否存在再出口安排，是否涉及军事用户、受管控名单主体或敏感产业链终端。"},
@@ -225,5 +243,204 @@ window.intelligenceSnapshots = [
       "最终用户和最终用途监管应覆盖境外买方、终端客户、再出口承诺和敏感用途筛查。",
       "对韩交易若出现买方产能不足、短期超量采购或对日同步转售，应优先调单复核。"
     ]
+  },
+  {
+    id: "mmc-tungsten-circulation-2026",
+    mineral: "tungsten",
+    sourceLanguage: "en",
+    sourcePublished: "2026-05-19",
+    collectedAt: "2026-07-15",
+    sourceName: "Mitsubishi Materials Corporation",
+    sourceUrl: "https://ir.mmc.co.jp/en/ir/news/auto_20260519540699/pdfFile.pdf",
+    titleZh: "日本三菱材料披露钨循环利用与高纯钨产能建设进展",
+    category: "供应链建设",
+    translationStatus: "已核验翻译",
+    summaryZh: "三菱材料在 2026 年 5 月投资者资料中披露，正通过欧洲废钨收集、日本秋田工厂硬质合金废料处理和高纯钨/氧化钨扩产，建设更稳定的钨资源循环体系。",
+    sectionsZh: [
+      {title:"废钨回收网络",body:"公司披露拟以荷兰子公司作为收集节点，拓展电子废料回收商的废钨收集路线，并在 2026 财年开展收集试点和相关许可申请。"},
+      {title:"日本加工能力",body:"公司披露将提升日本秋田工厂及德国 H.C. Starck 的硬质合金废料处理能力，以增加再生钨供给。"},
+      {title:"高纯材料扩产",body:"公司披露正扩充面向电子等应用的高纯钨和氧化钨产能，目标在 2027 财年投产；日本国内钨循环体系项目目标在 2028—2029 年启动。"}
+    ],
+    factsZh: [
+      "该资料为企业公开投资者材料，披露日期为 2026 年 5 月 19 日。",
+      "资料明确提及日本秋田工厂的硬质合金废料处理扩展及欧洲废钨收集路线建设。",
+      "资料未披露中国—韩国—日本之间的具体贸易量、企业交易记录或转运事实。"
+    ]
+  },
+  {
+    id: "china-tungsten-market-destinations-2026",
+    mineral: "tungsten",
+    sourceLanguage: "en",
+    sourcePublished: "2026-04",
+    collectedAt: "2026-07-15",
+    sourceName: "Shanghai Metals Market（援引海关统计口径）",
+    sourceUrl: "https://news.metal.com/newscontent/103817984-smm-analysis-chinas-tungsten-exports-fall-in-january-february-2026-while-ore-imports-skyrocket",
+    titleZh: "2026 年初中国钨产品主要出口市场仍包括韩国和日本",
+    category: "贸易统计",
+    translationStatus: "已核验翻译",
+    summaryZh: "公开行业统计援引海关数据称，2026 年 1—2 月中国钨产品及中间品出口总量同比下降；韩国、日本和欧洲仍是主要出口市场。该资料未提供中韩间钨粉或碳化钨单品的同比增长结论。",
+    sectionsZh: [
+      {title:"市场结构",body:"资料列明韩国、日本和欧洲为 2026 年 1—2 月中国钨产品主要出口市场。"},
+      {title:"总量口径",body:"资料称同期中国钨产品及中间品出口总量同比下降；该口径不等同于钨粉或碳化钨粉单一税号数据。"},
+      {title:"使用边界",body:"该公开资料可以用于说明韩国、日本在钨产品贸易中的市场地位；不能据此推出某一企业、某一产品或某一路线的出口增长。"}
+    ],
+    factsZh: [
+      "2026 年 1—2 月韩国、日本和欧洲被列为中国钨产品主要出口市场。",
+      "同一资料称中国钨产品及中间品总体出口同比下降。",
+      "公开页面未提供中国对韩国钨粉、碳化钨粉单品的可复核同比增幅。"
+    ]
+  },
+  {
+    id: "tungsten-carbide-export-rebound-2026",
+    mineral: "tungsten",
+    sourceLanguage: "zh-CN",
+    sourcePublished: "2026-05",
+    collectedAt: "2026-07-15",
+    sourceName: "中钨在线、上海有色网（援引海关统计）",
+    sourceUrl: "https://news.smm.cn/news/103865488",
+    titleZh: "2026 年一季度碳化钨出口同比回升",
+    category: "贸易统计",
+    translationStatus: "已核验",
+    summaryZh: "公开行业统计援引海关数据称，2026 年 1—2 月中国碳化钨出口 359.11 吨、同比增长 23.16%；3 月出口 159.3 吨，一季度累计同比增长 77.8%。",
+    sectionsZh: [
+      {title:"阶段性增长",body:"中钨在线披露，2026 年 1—2 月碳化钨出口量为 359.11 吨，同比增长 23.16%。"},
+      {title:"一季度数据",body:"上海有色网援引海关数据称，3 月碳化钨出口 159.3 吨，一季度累计同比增长 77.8%。"},
+      {title:"统计边界",body:"上述为全国出口统计，不包含韩国、日本等目的地拆分，也未披露具体出口企业、提单或最终用户；不能据此推定特定路线或主体异常。"}
+    ],
+    factsZh: [
+      "2026 年 1—2 月碳化钨出口 359.11 吨，同比增长 23.16%。",
+      "2026 年 3 月碳化钨出口 159.3 吨，一季度累计同比增长 77.8%。",
+      "该统计可说明阶段性出口回升，不构成企业或路线风险认定。"
+    ]
+  },
+  {
+    id: "strategic-minerals-enforcement-action-2025",
+    mineral: "tungsten",
+    sourceLanguage: "zh-CN",
+    sourcePublished: "2025-05-09",
+    collectedAt: "2026-07-15",
+    sourceName: "商务部出口管制信息网",
+    sourceUrl: "https://exportcontrol.mofcom.gov.cn/article/gndt/202505/1137.html",
+    titleZh: "国家部署打击战略矿产走私出口专项行动",
+    category: "监管动态",
+    translationStatus: "已核验",
+    summaryZh: "国家出口管制工作协调机制办公室在深圳召开现场会，部署打击战略矿产走私出口专项行动，明确由商务、公安、国家安全、海关、邮政等部门加强执法协作，聚焦伪报瞒报、夹藏走私和第三国转口等公开提及的规避方式。",
+    sectionsZh: [
+      {title:"专项部署",body:"公开答问显示，现场会明确商务、公安、国家安全、海关总署、国家邮政局等部门的任务分工，要求加强执法协作。"},
+      {title:"公开关注方向",body:"答问明确提及，针对战略矿产领域出现的伪报瞒报、夹藏走私和“第三国”转口等企图规避出口管制的行为，将开展跨部门调查和案情会商。"},
+      {title:"与钨矿情报的关系",body:"该专项行动面向战略矿产整体，不是针对某一家钨企业或某一票碳化钨货物的查处公告；页面将其作为监管环境动态展示。"}
+    ],
+    factsZh: [
+      "2025 年 5 月，国家出口管制工作协调机制办公室部署开展打击战略矿产走私出口专项行动。",
+      "公开答问提及伪报瞒报、夹藏走私和第三国转口等行为是专项行动关注方向。",
+      "该信息属于监管动态，不披露具体钨企业、碳化钨货物或案件编号。"
+    ]
+  },
+  {
+    id: "tungsten-export-anomaly-study-2026",
+    mineral: "tungsten",
+    sourceLanguage: "zh-CN",
+    sourcePublished: "2026-07-10",
+    collectedAt: "2026-07-10",
+    sourceName: "钨品出口异动研判",
+    sourceUrl: "",
+    titleZh: "钨品出口异动研判（2026年1—5月）",
+    category: "出口动态",
+    translationStatus: "无需翻译",
+    hideEvidence: true,
+    documentLabel: "展开研究材料全文",
+    summaryZh: "材料基于海关公开数据及行业渠道汇总，提出碳化钨增长与钨粉下降、对韩单月波动、钨铁与六氟化钨替代监测等观察。文中数据及推断尚待以原始统计表、许可证和报关单证逐项核验，不作为企业或交易违法认定依据。",
+    sectionsZh: [
+      {title:"数据口径",body:"材料注明数据来源包括海关总署统计、中商产业研究院、中钨在线及行业数据汇总；统计截至2026年1—5月，部分指标至6月。"},
+      {title:"主要观察",body:"材料将碳化钨与钨粉的结构变化、对韩流向集中、钨铁和六氟化钨的替代监测、APT和氧化钨出口收缩列为重点观察方向。"},
+      {title:"使用边界",body:"材料明确对转口、最终用途和规避管制等情形不作直接定性。相关结论应以产品技术参数、许可证、最终用户材料、原始统计表和报关单证复核为准。"}
+    ],
+    factsZh: [
+      "材料载明2026年1—5月钨制品出口呈量缩价涨特征，具体统计口径待原始表核验。",
+      "材料将碳化钨对韩集中度和钨粉3月单月波动列为需要继续比对的数据异常。",
+      "钨铁、六氟化钨和含钨废料只被列为监测方向，不能自动等同于受控钨粉或碳化钨。"
+    ],
+    fullTextZh: `# 中国钨品出口异动研判
+
+> 数据来源：海关总署统计、中商产业研究院、中钨在线、雪球行业数据汇总
+> 数据截至：2026年1—5月（部分至6月）
+> 说明：以下分析基于海关公开数据及行业渠道汇总，对未经证实的说法保持审慎
+
+---
+
+## 一、全品类出口数据总览（2026年1—5月）
+
+| 品类 | 出口量 | 同比变化 | 管制状态 | 异动等级 |
+|------|--------|----------|----------|----------|
+| 钨制品总计 | 4583.10吨 | -23.56% | — | 量缩价涨 |
+| 碳化钨 | 1006.99吨 | +160.35% | 已管制（第10号公告） | 高度关注 |
+| 钨粉 | 167.55吨 | -67.83% | 已管制 | 关注 |
+| 六氟化钨 | 210.88吨 | +12.19% | 未纳入管制 | 高度关注 |
+| 三氧化钨 | 200.00吨 | -39.48% | 已管制 | 关注 |
+| 钨丝 | 164.45吨 | +5.30% | 未管制 | 正常 |
+| 钨铁 | 约1375吨（估） | 降幅最小 | 未纳入管制 | 高度关注 |
+| 仲钨酸铵（APT） | 约0 | 归零 | 已管制 | 管制见效 |
+
+出口金额：55.26亿元，同比增长203.47%，呈现量缩价涨特征。
+
+## 二、六大异动逐一研判
+
+### 异动一：碳化钨增长与钨粉下降的结构反差
+
+材料载明，2026年1—5月碳化钨出口1006.99吨、同比增长160.35%，钨粉出口167.55吨、同比下降67.83%。该差异可能反映海外客户由进口钨粉自行碳化转为直接采购碳化钨，也可能受到库存、统计口径和产品结构调整影响。碳化钨与钨粉均应按第10号公告及技术参数判断是否属于受控物项；出口增长本身不等于存在违规。
+
+建议核验产品形态、技术参数、许可证、最终用户和最终用途，并与APT、氧化钨月度数据交叉比对。
+
+### 异动二：对韩钨粉月度脉冲
+
+材料列示：1月对韩钨粉18吨、2月0吨、3月61吨、4月1吨、5月4吨，3月单月占材料所列1—5月对韩累计84吨的较高比例。材料提出集中放行此前积压许可、韩国企业正常进口自用以及潜在再出口等解释；其中转口推断没有直接公开证据。
+
+审慎结论：月度脉冲是需核验的统计异常。应调取许可证批次、合同、最终用户声明、中国出口、韩国进口及韩国对日出口资料，不能仅凭波动作出定性。
+
+### 异动三：碳化钨对韩集中度
+
+材料称2026年5月碳化钨出口总量217.1吨、其中对韩国占比69%，对日直接出口在2—5月为零。韩国本土硬质合金产业及WF6生产可能形成正常需求；是否存在向日本再分销，公开信息不足以确认。
+
+建议持续监测HS2849902000相关碳化钨对韩月度出口，并结合韩国加工能力、库存和后续对日出口进行交叉验证。
+
+### 异动四：钨铁替代监测
+
+材料将钨铁（HS72028000）列为未纳入第10号公告清单的钨相关品类，并指出其可能被用于海外二次提取的商业场景。该材料不提供钨铁被用于规避管制的直接证据。
+
+建议建立钨铁产品规格、含钨比例、用途、目的地和客户产能的监测台账；如出现同比异常增长、目的地集中或交易链条变化，再调取单证复核。
+
+### 异动五：六氟化钨出口增长
+
+材料载明，2026年1—5月六氟化钨出口210.88吨、同比增长12.19%，并认为海外产能变化可能带来商业需求。材料提出应关注WF6原料端、真实终端与中转路径，但未提供对具体企业、具体路线或违法行为的证明。
+
+建议区分WF6与受控钨粉、碳化钨的物项边界；对目的地、最终用户、产品规格与许可证要求按当期规则逐项核验。
+
+### 异动六：APT与氧化钨出口收缩
+
+材料称APT和氧化钨出口已连续收缩或归零，并将其视作上游原料出口变化信号。是否由管制政策、商业需求、统计口径或其他因素共同导致，仍需通过原始月度统计和许可证数据验证。
+
+## 三、对韩出口异动综合研判
+
+材料汇总的观察包括：钨粉1—5月对韩84吨、碳化钨5月对韩占比较高、APT和氧化钨出口收缩、钨铁数据尚不明确以及WF6需关注目的地分布。材料的核心建议是：先核验受控物项的许可证和最终用途，再通过中国出口、韩国进口、韩国对日出口与买方产能进行交叉比对。
+
+材料同时指出，碳化钨对韩集中、3月钨粉脉冲、钨铁及WF6增长均是监测线索，而非违法事实。
+
+## 四、再生钨与含钨废料监测
+
+材料指出，公开统计未必能直接识别再生钨或含钨废料的对韩、对日出口。含钨废料可能涉及HS2620等多个编码，产品识别和统计拆分存在困难。材料将其列为数据监测盲区，不主张据此直接认定存在规避管制。
+
+建议调取相关HS编码出口数据、货物成分、回收加工记录、用途和境外买方信息，识别是否存在新增或异常增长。
+
+## 五、建议持续监测的指标
+
+1. 碳化钨对韩月度出口量及占比，并与韩国本土加工能力比对。
+2. 钨铁出口总量、目的地和同比变化，重点观察是否出现异常替代。
+3. 六氟化钨出口量、目的地与最终用户，核验供应链路径。
+4. 含钨废料相关HS编码的出口变化和货物成分。
+5. 韩国对日钨制品转出口，与韩国自中国进口数据进行交叉核验。
+
+## 总结
+
+材料认为，钨品出口中值得继续观察的是碳化钨与钨粉的结构差异、对韩集中与单月波动，以及钨铁、六氟化钨和含钨废料等非同类品项的监测问题。所有异常应以交易时间、产品技术参数、许可证、报关单、运输和最终用户材料为基础复核；在取得原始证据前，不对企业、路线或交易作违法认定。`
   }
 ];

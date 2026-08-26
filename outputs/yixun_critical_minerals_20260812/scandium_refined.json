@@ -1,0 +1,16 @@
+{
+  "mineral": "钪",
+  "term": "SCANDIUM OXIDE",
+  "scope": "页面显示本年度；原产国/地区=CHINA",
+  "checkedAt": "2026-08-12T10:14:25.219Z",
+  "total": 0,
+  "reviewedRows": 0,
+  "coverage": "页面结果全量",
+  "validation": {
+    "termTag": true,
+    "chinaTag": true,
+    "dateValue": "本年度",
+    "firstDescription": ""
+  },
+  "rows": []
+}

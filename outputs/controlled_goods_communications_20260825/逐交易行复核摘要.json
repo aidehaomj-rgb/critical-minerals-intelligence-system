@@ -1,0 +1,18 @@
+{
+  "candidate_workbooks": 18,
+  "scanned_workbooks": 18,
+  "scanned_nonempty_rows": 62490,
+  "retained_rows": 1977,
+  "rows_with_email": 1977,
+  "unique_normalized_emails": 138,
+  "high_priority_rows_score_8_or_9": 0,
+  "high_priority_cases": {},
+  "matched_group_retained_rows": {
+    "型号参数可核查字段": 63,
+    "通讯字段": 1726,
+    "管制或两用物项": 71,
+    "普通拼箱分票字段": 6
+  },
+  "workbook_errors": [],
+  "method_note": "All risk groups on a retained row co-occur in the same spreadsheet row."
+}

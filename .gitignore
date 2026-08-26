@@ -15,3 +15,27 @@ Thumbs.db
 
 .idea/
 .vscode/
+
+# Local analysis, rendering, and Codex working files
+.codex_tmp*/
+.codex_tmp*
+.codex_work/
+.docx_qa/
+.docx_render_tools/
+.qa_*/
+.qa_*.pdf
+.tmp*/
+.tmp*
+.artifact_*/
+.pc_*.json
+temp/
+tmp/
+
+# Vendored runtimes and generated local databases
+tools/.vendor/
+frozen-food-risk-dashboard/
+**/edge_profile/
+**/_qa_edge_profile/
+*.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal

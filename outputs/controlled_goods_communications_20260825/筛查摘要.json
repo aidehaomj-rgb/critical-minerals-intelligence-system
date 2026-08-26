@@ -1,0 +1,43 @@
+{
+  "source_database": "D:\\codex\\XG执法\\2026_案例库\\enforcement_cases_2026.sqlite",
+  "documents_with_text": 1248,
+  "cases_in_catalog": 360,
+  "documents_with_email_address": 17,
+  "unique_email_addresses": 173,
+  "message_like_documents": 0,
+  "candidate_documents": 134,
+  "candidate_cases": 90,
+  "high_priority_documents_score_8_or_9": 1,
+  "high_priority_cases_score_8_or_9": 1,
+  "pattern_coverage": {
+    "管制或两用物项": {
+      "documents": 99,
+      "cases": 67
+    },
+    "明确申报不实或改写": {
+      "documents": 0,
+      "cases": 0
+    },
+    "型号参数可核查字段": {
+      "documents": 158,
+      "cases": 75
+    },
+    "明确藏匿或未申报": {
+      "documents": 23,
+      "cases": 18
+    },
+    "第三国转口或主体替换": {
+      "documents": 6,
+      "cases": 4
+    },
+    "通讯字段": {
+      "documents": 317,
+      "cases": 289
+    },
+    "普通拼箱分票字段": {
+      "documents": 8,
+      "cases": 4
+    }
+  },
+  "caveat": "Email-address mentions are not automatically e-mail messages. Message-like status requires recognizable message headers and still needs manual verification."
+}

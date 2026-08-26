@@ -1,0 +1,16 @@
+{
+  "mineral": "铟",
+  "term": "INDIUM PHOSPHIDE",
+  "scope": "页面显示日期：2026-01-01 ~ 2026-08-06；原产国/地区=CHINA",
+  "checkedAt": "2026-08-12T09:46:24.998Z",
+  "total": 0,
+  "reviewedRows": 0,
+  "coverage": "页面结果全量",
+  "validation": {
+    "termTag": true,
+    "chinaTag": true,
+    "dateValue": "2026-01-01 ~ 2026-08-06",
+    "firstDescription": ""
+  },
+  "rows": []
+}

@@ -87,6 +87,9 @@ button{font:inherit;color:inherit}
 .report{display:grid;grid-template-columns:1fr 1.15fr;gap:26px}.doc{height:400px;padding:28px 30px;background:linear-gradient(135deg,rgba(9,52,95,.88),rgba(3,20,43,.9));border:1px solid rgba(37,217,255,.5);box-shadow:16px 14px 0 rgba(0,92,171,.12),var(--shadow);position:relative}.doc::before{content:"AI RESEARCH";position:absolute;right:15px;top:12px;font:10px "Bahnschrift";letter-spacing:.2em;color:rgba(37,217,255,.45)}.doc h3{font-size:23px;margin:26px 0 7px}.doc .line{height:6px;background:rgba(137,194,222,.14);margin:10px 0}.doc .line:nth-of-type(2){width:80%}.doc .line:nth-of-type(3){width:94%}.doc .line:nth-of-type(4){width:65%}.doc-chart{height:100px;margin-top:25px;display:flex;align-items:flex-end;gap:8px}.doc-chart i{flex:1;height:var(--h);background:linear-gradient(var(--cyan),#0d58bb)}
 .values{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.value{padding:24px;border:1px solid rgba(37,217,255,.48);background:linear-gradient(135deg,rgba(8,50,96,.82),rgba(2,18,40,.8));text-align:center}.value .vicon{font-size:34px;color:var(--cyan);margin-bottom:9px}.value h3{font-size:19px}.value p{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.6}.next{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:16px}.next div{padding:9px 12px;border-left:2px solid var(--cyan);background:rgba(5,50,96,.36);font-size:11px;color:#9ac4da}
 .closing{margin-top:20px;padding:13px;text-align:center;border:1px solid rgba(37,217,255,.4);background:linear-gradient(90deg,transparent,rgba(9,83,151,.25),transparent);color:#d9f3ff;font-size:13px;letter-spacing:.04em}
+.overview-visual-slide{padding:0;background:#020713;isolation:isolate}.overview-visual-slide::before{inset:13px;z-index:3;opacity:.78}.overview-visual-slide::after{inset:0;z-index:2;background:linear-gradient(108deg,transparent 35%,rgba(86,220,255,.03) 44%,rgba(167,244,255,.32) 50%,rgba(86,220,255,.03) 56%,transparent 65%);background-size:220% 100%;opacity:0;mix-blend-mode:screen;animation:overview-scan 6.5s ease-in-out infinite}.overview-visual-slide.active::after{opacity:1}.overview-visual-image{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:center;animation:overview-breathe 7s ease-in-out infinite}.overview-visual-glow{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 50% 88%,rgba(0,180,255,.2),transparent 20%),radial-gradient(circle at 79% 22%,rgba(52,106,255,.13),transparent 24%);mix-blend-mode:screen;animation:overview-glow 3.4s ease-in-out infinite}.overview-visual-caption{position:absolute;z-index:4;left:-9999px}
+.control-visual-slide::after{animation-duration:7.8s;animation-delay:-2.3s}.control-visual-slide .overview-visual-image{animation-duration:8.5s;animation-direction:reverse}.control-visual-slide .overview-visual-glow{background:radial-gradient(circle at 50% 84%,rgba(0,196,255,.25),transparent 21%),radial-gradient(circle at 17% 62%,rgba(43,124,255,.14),transparent 24%);animation-delay:-1s}
+@keyframes overview-scan{0%,34%{background-position:145% 0}62%,100%{background-position:-55% 0}}@keyframes overview-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.012)}}@keyframes overview-glow{0%,100%{opacity:.42}50%{opacity:1}}
 .chrome{position:fixed;z-index:10;pointer-events:none}.brand{left:32px;top:26px;font-size:11px;letter-spacing:.18em;color:#66bde7}.brand b{color:var(--cyan)}.page-no{right:36px;top:25px;font:700 12px "Bahnschrift";color:#6bbfe9}.page-no b{font-size:19px;color:#e7faff}.progress{left:50%;bottom:22px;transform:translateX(-50%);width:min(380px,40vw);height:2px;background:rgba(34,133,193,.25)}.progress i{display:block;height:100%;width:5.26%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);transition:width .7s var(--ease)}
 .controls{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:12;display:flex;flex-direction:column;gap:6px}.dotnav{width:7px;height:7px;border:1px solid #1985c9;background:transparent;transform:rotate(45deg);cursor:pointer;transition:.3s}.dotnav.active{background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 9px var(--cyan);transform:rotate(45deg) scale(1.35)}
 .navbtn{position:fixed;z-index:12;bottom:18px;width:30px;height:30px;border:1px solid rgba(37,217,255,.34);background:rgba(3,26,54,.72);cursor:pointer;color:#77ccef}.prev{right:76px}.nextbtn{right:38px}.navbtn:hover{border-color:var(--cyan);color:#fff;box-shadow:0 0 14px rgba(37,217,255,.25)}
@@ -161,36 +164,16 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
-  <section class="slide section-intro">
-    <span class="intro-no">01</span><div class="eyebrow reveal">MODULE ONE</div><h2 class="title reveal">情报工作台：持续监测与态势感知</h2><p class="subtitle reveal">围绕关键矿产出口管制场景，构建政策底座、矿产态势、开源情报、执法案例和文件归档五位一体的情报感知体系。</p>
-    <div class="intro-visual reveal"><i class="intro-line"></i><div class="intro-nodes"><div class="intro-node"><span>◫</span></div><div class="intro-node"><span>⌁</span></div><div class="intro-node"><span>◎</span></div><div class="intro-node"><span>⚖</span></div><div class="intro-node"><span>▤</span></div></div></div>
-    <p class="closing reveal" style="width:min(850px,80vw)">让风险信号尽可能早地被发现，让后续分析建立在持续更新、可追溯的情报底座之上。</p>
+  <section class="slide overview-visual-slide" aria-label="情报总览：一屏总览全局态势">
+    <img class="overview-visual-image" src="assets/briefing-page-5-overview.png" alt="情报总览一屏总览全局态势" />
+    <div class="overview-visual-glow" aria-hidden="true"></div>
+    <p class="overview-visual-caption">情报总览：一屏总览全局态势</p>
   </section>
 
-  <section class="slide">
-    <div class="header reveal"><div class="eyebrow">04 · INTELLIGENCE OVERVIEW</div><h2 class="title">一张态势图串联政策、市场、执法与研究成果</h2><p class="subtitle">一屏统揽整体态势，让政策变化、市场异动、执法关联和研究成果在同一视角下联动呈现。</p></div>
-    <div class="dashboard reveal">
-      <div class="stack"><div class="mini"><b>11</b><span>组政策动态监测</span></div><div class="mini"><b>22</b><span>种重点矿产品指数</span></div><div class="mini"><b>6 + 4</b><span>情报快照 / 执法案例</span></div><div class="mini"><b>3 + 2</b><span>深度研究 / 战略报告</span></div></div>
-      <div class="card globe"><div class="globe-ball"></div><div style="position:absolute;bottom:16px;text-align:center"><b class="accent">GLOBAL MINERAL INTELLIGENCE</b><p style="font-size:11px;color:var(--muted)">全球关键矿产态势监测</p></div></div>
-      <div class="stack"><div class="radar"></div><div class="card"><h3>3 类重点预警</h3><ul><li>政策到期窗口</li><li>价格与指数异动</li><li>执法案例关联</li></ul></div><div class="mini"><b>LIVE</b><span>政策、情报、案例统一排序</span></div></div>
-    </div>
-  </section>
-
-  <section class="slide">
-    <div class="header reveal"><div class="eyebrow">05 · CONTROL LIST</div><h2 class="title">构建统一、可核验的出口管制业务规则底座</h2><p class="subtitle">把复杂政策转化为可查询、可核验、可执行的业务规则。</p></div>
-    <div class="grid g4 reveal">
-      <div class="card"><div class="icon">▣</div><h3>政策完整归集</h3><p>归集镓锗、石墨、锑、钨、中重稀土、超硬材料等 <b class="accent">11组政策</b>。</p></div>
-      <div class="card"><div class="icon">拆</div><h3>商品逐项拆分</h3><p>将公告组合物项拆为 <b class="accent">26项独立记录</b>，支持逐项查询。</p></div>
-      <div class="card"><div class="icon">⌕</div><h3>多维关联查询</h3><p>关联物项名称、管制编码、参考税号、政策来源和许可要求。</p></div>
-      <div class="card"><div class="icon">◷</div><h3>状态动态管理</h3><p>现行与暂停分类展示，纳入到期时间和政策恢复逻辑。</p></div>
-    </div>
-    <div class="card reveal" style="margin-top:14px;padding:12px 18px">
-      <table class="table"><thead><tr><th>政策组</th><th>代表物项</th><th>规则维度</th><th>政策状态</th><th>业务动作</th></tr></thead><tbody>
-        <tr><td>镓、锗相关物项</td><td>金属 / 化合物</td><td>成分 · 形态 · 编码</td><td><span class="status on">现行</span></td><td>许可证核验</td></tr>
-        <tr><td>石墨相关物项</td><td>高纯 / 天然鳞片</td><td>纯度 · 粒径 · 用途</td><td><span class="status on">现行</span></td><td>技术参数核查</td></tr>
-        <tr><td>部分中重稀土</td><td>金属 / 靶材 / 磁材</td><td>元素 · 工艺 · 最终用户</td><td><span class="status pause">动态监测</span></td><td>生效时间校验</td></tr>
-      </tbody></table>
-    </div>
+  <section class="slide overview-visual-slide control-visual-slide" aria-label="关键矿产清单：可靠的数据底座">
+    <img class="overview-visual-image" src="assets/briefing-page-6-control-list.png" alt="关键矿产清单可靠的数据底座" />
+    <div class="overview-visual-glow" aria-hidden="true"></div>
+    <p class="overview-visual-caption">关键矿产清单：可靠的数据底座</p>
   </section>
 
   <section class="slide">
@@ -253,7 +236,7 @@ button{font:inherit;color:inherit}
   </section>
 
   <section class="slide">
-    <div class="header reveal"><div class="eyebrow">10 · AI EVIDENCE ANALYSIS</div><h2 class="title">用证据边界框定结论，让风险研判可追溯</h2><p class="subtitle">模型不替代业务判断，而是帮助组织证据、排除错误样本并发现优先核查线索。</p></div>
+    <div class="header reveal"><div class="eyebrow">10 · AI EVIDENCE ANALYSIS</div><h2 class="title">智能研判风险：让每条线索更清晰、更可追溯</h2><p class="subtitle">模型不替代业务判断，而是帮助组织证据、排除错误样本并发现优先核查线索。</p></div>
     <div class="evidence reveal">
       <div class="card"><h3>钨专题 · 证据边界过滤</h3><div class="funnel"><div>商业数据库交易明细 · 338条定向匹配</div><div>政策时间校验 · 排除2025年2月4日前交易</div><div>物项 / 税号 / 路线 / 主体交叉验证</div><div>4条许可核查线索 + 2条高优先核查链</div></div><div class="note">识别1起公开处罚案例；事实、推断和待核实事项分开展示。</div></div>
       <div class="grid g2">
