@@ -409,7 +409,7 @@ let state = {status:"all",year:"all",query:"",page:1,pageSize:12};
 let marketState = {query:"",type:"all"};
 let marketSituationState = {view:"alternatives",projectPage:1};
 let announcementState = {query:"",status:"all",notice:"all",controlType:"all",page:1,pageSize:12};
-let entityState = {query:"",controlType:"all",country:"all",page:1,pageSize:10};
+let entityState = {query:"",controlType:"all",country:"all",page:1,pageSize:10,focus:false};
 const controlTypeMeta = {
   unreliable_entity:{label:"不可靠实体",className:"unreliable"},
   control_list:{label:"出口管制管控名单",className:"controlled"},
@@ -1832,6 +1832,7 @@ function renderExportPage(){
   renderTable();
   bindEntityCatalog();
   renderEntityTable();
+  if(entityState.focus){entityState.focus=false;requestAnimationFrame(()=>document.getElementById("entityCatalog")?.scrollIntoView({behavior:"smooth",block:"start"}));}
   bindAnnouncementCatalog();
   renderAnnouncementTable();
 }
@@ -2269,6 +2270,25 @@ function renderSettingsPage(){
   var totalPolicyCount=activeCount+pausedCount;
   var activePolicyPct=totalPolicyCount?Math.round(activeCount/totalPolicyCount*100):0;
   var latestEventDate=events.length?events[0].date:"—";
+  var entityRows=window.controlledEntities||[];
+  function aggregateEntities(field,order){
+    var counts={};
+    for(var e=0;e<entityRows.length;e++){var key=entityRows[e][field]||"未注明";counts[key]=(counts[key]||0)+1;}
+    var keys=order||Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]||a.localeCompare(b,"zh-CN");});
+    return keys.map(function(key){return {key:key,label:field==="controlType"?(controlTypeMeta[key]?.label||key):key,count:counts[key]||0};});
+  }
+  var entityCountryData=aggregateEntities("country");
+  var entityTypeData=aggregateEntities("controlType",["unreliable_entity","control_list","watch_list"]);
+  var entityChartColors=["#48bee1","#ff9a67","#b18aff","#55d792","#f0c75e","#ef718d","#6ba4ff","#71d6c6"];
+  function entityDonut(data,filterName,title){
+    var total=data.reduce(function(sum,item){return sum+item.count;},0),offset=0;
+    var arcs=data.filter(function(item){return item.count>0;}).map(function(item,index){
+      var pct=total?item.count/total*100:0,color=entityChartColors[index%entityChartColors.length],start=offset;offset+=pct;
+      return "<circle class=\"ov-entity-arc\" cx=\"70\" cy=\"70\" r=\"54\" pathLength=\"100\" stroke=\""+color+"\" stroke-dasharray=\""+pct+" "+(100-pct)+"\" stroke-dashoffset=\"-"+start+"\" data-entity-drill=\""+filterName+"\" data-entity-value=\""+item.key+"\"><title>"+item.label+"："+item.count+"家，点击查看</title></circle>";
+    }).join("");
+    var legend=data.map(function(item,index){var disabled=item.count===0?" disabled aria-disabled=\"true\"":"";return "<button class=\"ov-entity-legend\" data-entity-drill=\""+filterName+"\" data-entity-value=\""+item.key+"\""+disabled+"><i style=\"--entity-color:"+entityChartColors[index%entityChartColors.length]+"\"></i><span>"+item.label+"</span><b>"+item.count+"</b></button>";}).join("");
+    return "<div class=\"ov-entity-chart\"><div class=\"ov-entity-donut\"><svg viewBox=\"0 0 140 140\" role=\"img\" aria-label=\""+title+"\"><circle class=\"ov-entity-track\" cx=\"70\" cy=\"70\" r=\"54\"></circle>"+arcs+"</svg><div><strong>"+total+"</strong><span>家实体</span></div></div><div class=\"ov-entity-legend-list\">"+legend+"</div></div>";
+  }
 
   function metricSpark(values){
     return "<span class=\"ov-metric-spark\" aria-hidden=\"true\">"+values.map(function(value,index){
@@ -2322,6 +2342,8 @@ function renderSettingsPage(){
       "</article>"+
     "</section>"+
 
+    "<section class=\"panel ov-entity-distribution\"><div class=\"panel-head\"><div><p class=\"ov-panel-kicker\">ENTITY CONTROL DISTRIBUTION</p><h2>管制实体分布</h2><p>点击扇区或图例，下钻到对应国家/地区及管制类型的实体清单</p></div><span class=\"panel-tag\">DRILL-DOWN</span></div><div class=\"ov-entity-chart-grid\"><article><h3>按国家 / 地区</h3>"+entityDonut(entityCountryData,"country","管制实体国家和地区分布")+"</article><article><h3>按管制类型</h3>"+entityDonut(entityTypeData,"controlType","管制实体类型分布")+"</article></div></section>"+
+
     "<section class=\"ov-lower-grid\">"+
       "<article class=\"panel ov-events-panel\"><div class=\"panel-head\"><div><p class=\"ov-panel-kicker\">LATEST SIGNALS</p><h2>最新动态</h2><p>政策更新、情报采集与案例归档</p></div><span class=\"ov-live-badge\"><i></i>LIVE</span></div><div class=\"ov-events-list\">"+eventRows+"</div></article>"+
       "<article class=\"panel ov-alert-panel\"><div class=\"panel-head\"><div><p class=\"ov-panel-kicker\">RISK WATCH</p><h2>重点预警</h2><p>需要持续跟进的风险信号</p></div><span class=\"ov-alert-count\">3</span></div><div class=\"ov-alert-list\">"+
@@ -2331,6 +2353,13 @@ function renderSettingsPage(){
       "</div></article>"+
     "</section>"+
   "</div>";
+  document.querySelectorAll("[data-entity-drill]").forEach(function(target){target.addEventListener("click",function(){
+    if(target.disabled)return;
+    entityState.query="";entityState.page=1;entityState.focus=true;
+    if(target.dataset.entityDrill==="country"){entityState.country=target.dataset.entityValue;entityState.controlType="all";}
+    else{entityState.controlType=target.dataset.entityValue;entityState.country="all";}
+    location.hash="#/export-controls";
+  });});
   refreshOverviewCollectionStatus();
 }
 
