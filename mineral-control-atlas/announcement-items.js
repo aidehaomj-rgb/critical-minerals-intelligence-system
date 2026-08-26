@@ -220,5 +220,9 @@ const announcementItems = announcementDefinitions.flatMap(definition =>
     item,
     controlCode,
     hsCode
+    ,controlType: definition.status === "info" ? "status_adjustment"
+      : /技术|工艺|目录/.test(`${item} ${controlCode}`) ? "technology_control"
+      : /实体|最终用户|名单/.test(`${item} ${controlCode}`) ? "entity_measure"
+      : "item_control"
   }))
 );

@@ -408,7 +408,18 @@ const commandInput = document.getElementById("commandInput");
 let state = {status:"all",year:"all",query:"",page:1,pageSize:12};
 let marketState = {query:"",type:"all"};
 let marketSituationState = {view:"alternatives",projectPage:1};
-let announcementState = {query:"",status:"all",notice:"all",page:1,pageSize:12};
+let announcementState = {query:"",status:"all",notice:"all",controlType:"all",page:1,pageSize:12};
+let entityState = {query:"",controlType:"all",country:"all",page:1,pageSize:10};
+const controlTypeMeta = {
+  unreliable_entity:{label:"不可靠实体",className:"unreliable"},
+  control_list:{label:"出口管制管控名单",className:"controlled"},
+  watch_list:{label:"关注名单",className:"watch"},
+  item_control:{label:"物项管制",className:"item"},
+  technology_control:{label:"技术管制",className:"technology"},
+  entity_measure:{label:"实体措施",className:"entity"},
+  status_adjustment:{label:"状态调整",className:"adjustment"}
+};
+function controlTypeBadge(type){const meta=controlTypeMeta[type]||{label:type||"未分类",className:"other"};return `<span class="control-type-badge ${meta.className}">${meta.label}</span>`;}
 let intelligenceState = {mineral:"tungsten",snapshotPage:1,collectionStatus:"",collectionRequestedAt:"",collectionItems:[],collectionRunIds:[],collectionError:"",collectionLoaded:false};
 let aiAnalysisState = {mineral:"tungsten"};
 let libraryState = {query:"",source:"all",type:"all",view:"grid",page:1,pageSize:10};
@@ -1786,6 +1797,17 @@ function renderExportPage(){
         <div id="tableWrap"></div>
       </section>
 
+      <section class="panel catalog-panel entity-catalog" id="entityCatalog">
+        <div class="panel-head"><div><h2>管制企业清单</h2><p>按公告明示类型区分不可靠实体、出口管制管控名单和关注名单</p></div><span class="panel-tag">OFFICIAL ENTITY LISTS</span></div>
+        <div class="catalog-toolbar entity-toolbar">
+          <label class="search-field"><span>⌕</span><input id="entitySearch" placeholder="搜索企业中英文名称、公告或措施…" value="${entityState.query}"/></label>
+          <select class="year-select" id="entityType">${[["all","全部管制类型"],["unreliable_entity","不可靠实体"],["control_list","出口管制管控名单"],["watch_list","关注名单"]].map(([value,label])=>`<option value="${value}" ${entityState.controlType===value?"selected":""}>${label}</option>`).join("")}</select>
+          <select class="year-select" id="entityCountry"><option value="all">全部国家/地区</option>${[...new Set((window.controlledEntities||[]).map(item=>item.country))].map(country=>`<option value="${country}" ${entityState.country===country?"selected":""}>${country}</option>`).join("")}</select>
+        </div>
+        <div class="table-meta"><span>共找到 <strong id="entityResultCount">0</strong> 家实体</span><span>不同名单具有不同法律状态，不作合并定性</span></div>
+        <div id="entityTableWrap"></div>
+      </section>
+
       <section class="panel catalog-panel hs-catalog" id="hsCatalog">
         <div class="panel-head">
           <div><h2>公告商品与税号清单</h2><p>按公告原文提取商品、两用物项管制编码和参考海关商品编号/税则号列</p></div>
@@ -1800,6 +1822,7 @@ function renderExportPage(){
           <select class="year-select" id="hsStatus">
             ${[["all","全部状态"],["active","现行"],["paused","暂停"],["info","状态调整"]].map(([value,label])=>`<option value="${value}" ${announcementState.status===value?"selected":""}>${label}</option>`).join("")}
           </select>
+          <select class="year-select" id="hsControlType">${[["all","全部管制类型"],["item_control","物项管制"],["technology_control","技术管制"],["entity_measure","实体措施"],["status_adjustment","状态调整"]].map(([value,label])=>`<option value="${value}" ${announcementState.controlType===value?"selected":""}>${label}</option>`).join("")}</select>
         </div>
         <div class="table-meta"><span>共整理 <strong id="hsResultCount">0</strong> 项公告物项</span><span>税号仅供识别参考，以最新税则及主管部门解释为准</span></div>
         <div class="hs-table-wrap" id="hsTableWrap"></div>
@@ -1807,6 +1830,8 @@ function renderExportPage(){
     </div>`;
   bindExportControls();
   renderTable();
+  bindEntityCatalog();
+  renderEntityTable();
   bindAnnouncementCatalog();
   renderAnnouncementTable();
 }
@@ -1824,9 +1849,10 @@ function renderTable(){
   document.getElementById("resultCount").textContent=rows.length;
   document.getElementById("tableWrap").innerHTML=rows.length?`
     <table class="policy-table">
-      <thead><tr><th>矿产 / 材料</th><th>管制范围</th><th>实施 / 公布</th><th>政策来源</th><th>当前状态</th><th></th></tr></thead>
+      <thead><tr><th>矿产 / 材料</th><th>管制类型</th><th>管制范围</th><th>实施 / 公布</th><th>政策来源</th><th>当前状态</th><th></th></tr></thead>
       <tbody>${pageRows.map(p=>`<tr tabindex="0" data-id="${p.id}">
         <td><div class="mineral-cell"><span class="element">${p.symbol}</span><div><strong>${p.name}</strong><small>${p.type}</small></div></div></td>
+        <td>${controlTypeBadge(p.type==="技术"?"technology_control":"item_control")}</td>
         <td class="scope-text">${p.scopeShort}</td>
         <td class="policy-date-cell"><span>${p.date}</span>${p.pauseDate?`<small>暂停：${p.pauseDate}</small>`:""}</td>
         <td class="policy-source-cell"><span>${p.source.split("；")[0]}</span>${p.pauseNotice?`<a href="${p.pauseUrl}" target="_blank" rel="noreferrer">${p.pauseNotice} ↗</a>`:""}</td>
@@ -1850,12 +1876,33 @@ function bindExportControls(){
   document.getElementById("openHsCatalog").addEventListener("click",()=>document.getElementById("hsCatalog").scrollIntoView({behavior:"smooth",block:"start"}));
 }
 
+function filteredEntities(){
+  const q=entityState.query.trim().toLowerCase();
+  return (window.controlledEntities||[]).filter(item=>(entityState.controlType==="all"||item.controlType===entityState.controlType)&&(entityState.country==="all"||item.country===entityState.country)&&(!q||[item.name,item.nameEn,item.notice,item.measure,item.country].join(" ").toLowerCase().includes(q)));
+}
+
+function bindEntityCatalog(){
+  document.getElementById("entitySearch").addEventListener("input",event=>{entityState.query=event.target.value;entityState.page=1;renderEntityTable()});
+  document.getElementById("entityType").addEventListener("change",event=>{entityState.controlType=event.target.value;entityState.page=1;renderEntityTable()});
+  document.getElementById("entityCountry").addEventListener("change",event=>{entityState.country=event.target.value;entityState.page=1;renderEntityTable()});
+}
+
+function renderEntityTable(){
+  const rows=filteredEntities(),pageCount=Math.max(1,Math.ceil(rows.length/entityState.pageSize));
+  entityState.page=Math.min(Math.max(1,entityState.page),pageCount);
+  const pageRows=rows.slice((entityState.page-1)*entityState.pageSize,entityState.page*entityState.pageSize);
+  document.getElementById("entityResultCount").textContent=rows.length;
+  document.getElementById("entityTableWrap").innerHTML=rows.length?`<table class="entity-table"><thead><tr><th>企业 / 实体</th><th>管制类型</th><th>国家/地区</th><th>列入日期</th><th>公告及措施</th><th>原文</th></tr></thead><tbody>${pageRows.map(item=>`<tr><td><strong>${item.name}</strong><small>${item.nameEn}</small></td><td>${controlTypeBadge(item.controlType)}</td><td>${item.country}</td><td>${item.date}</td><td><strong>${item.notice}</strong><small>${item.measure}</small></td><td><a class="table-source-link" href="${item.source}" target="_blank" rel="noreferrer">查看 ↗</a></td></tr>`).join("")}</tbody></table>${pageCount>1?`<nav class="snapshot-pagination compact-pagination" aria-label="管制企业清单分页"><button type="button" data-entity-page="${entityState.page-1}" ${entityState.page===1?"disabled":""}>上一页</button>${Array.from({length:pageCount},(_,i)=>`<button type="button" data-entity-page="${i+1}" class="${i+1===entityState.page?"active":""}">${i+1}</button>`).join("")}<button type="button" data-entity-page="${entityState.page+1}" ${entityState.page===pageCount?"disabled":""}>下一页</button></nav>`:""}`:`<div class="empty">当前筛选条件下没有已收录实体。</div>`;
+  document.querySelectorAll("[data-entity-page]").forEach(button=>button.addEventListener("click",()=>{entityState.page=Number(button.dataset.entityPage);renderEntityTable();document.getElementById("entityCatalog")?.scrollIntoView({behavior:"smooth",block:"start"})}));
+}
+
 function filteredAnnouncementItems(){
   const q=announcementState.query.trim().toLowerCase();
   return announcementItems.filter(item=>
     (announcementState.status==="all"||item.status===announcementState.status)&&
     (announcementState.notice==="all"||item.notice===announcementState.notice)&&
-    (!q||[item.notice,item.item,item.controlCode,item.hsCode].join(" ").toLowerCase().includes(q))
+    (announcementState.controlType==="all"||item.controlType===announcementState.controlType)&&
+    (!q||[item.notice,item.item,item.controlCode,item.hsCode,controlTypeMeta[item.controlType]?.label].join(" ").toLowerCase().includes(q))
   );
 }
 
@@ -1863,6 +1910,7 @@ function bindAnnouncementCatalog(){
   document.getElementById("hsSearch").addEventListener("input",event=>{announcementState.query=event.target.value;announcementState.page=1;renderAnnouncementTable()});
   document.getElementById("hsNotice").addEventListener("change",event=>{announcementState.notice=event.target.value;announcementState.page=1;renderAnnouncementTable()});
   document.getElementById("hsStatus").addEventListener("change",event=>{announcementState.status=event.target.value;announcementState.page=1;renderAnnouncementTable()});
+  document.getElementById("hsControlType").addEventListener("change",event=>{announcementState.controlType=event.target.value;announcementState.page=1;renderAnnouncementTable()});
   document.getElementById("exportHsData").addEventListener("click",()=>downloadAnnouncementCSV());
 }
 
@@ -1874,9 +1922,10 @@ function renderAnnouncementTable(){
   document.getElementById("hsResultCount").textContent=rows.length;
   document.getElementById("hsTableWrap").innerHTML=rows.length?`
     <table class="hs-table">
-      <thead><tr><th>公告</th><th>商品 / 物项</th><th>管制编码</th><th>参考海关商品编号 / 税则号列</th><th>状态</th><th>原文</th></tr></thead>
+      <thead><tr><th>公告</th><th>管制类型</th><th>商品 / 物项</th><th>管制编码</th><th>参考海关商品编号 / 税则号列</th><th>状态</th><th>原文</th></tr></thead>
       <tbody>${pageRows.map(item=>`<tr>
         <td><strong>${item.notice}</strong><small>${item.date}</small></td>
+        <td>${controlTypeBadge(item.controlType)}</td>
         <td>${item.item}</td>
         <td class="control-code">${item.controlCode}</td>
         <td class="hs-code">${item.hsCode}</td>
@@ -1888,8 +1937,8 @@ function renderAnnouncementTable(){
 }
 
 function downloadAnnouncementCSV(){
-  const head=["公告","发布日期","商品/物项","两用物项管制编码","参考海关商品编号/税则号列","状态","官方原文"];
-  const lines=[head,...filteredAnnouncementItems().map(item=>[item.notice,item.date,item.item,item.controlCode,item.hsCode,item.statusText,item.source])]
+  const head=["公告","发布日期","管制类型","商品/物项","两用物项管制编码","参考海关商品编号/税则号列","状态","官方原文"];
+  const lines=[head,...filteredAnnouncementItems().map(item=>[item.notice,item.date,controlTypeMeta[item.controlType]?.label||item.controlType,item.item,item.controlCode,item.hsCode,item.statusText,item.source])]
     .map(row=>row.map(value=>`"${String(value).replaceAll('"','""')}"`).join(",")).join("\n");
   const blob=new Blob(["\ufeff"+lines],{type:"text/csv;charset=utf-8"});
   const anchor=document.createElement("a");
@@ -3035,8 +3084,8 @@ function snapshotToLibraryFile(item,index){
 }
 
 function announcementLibraryFile(){
-  const head=["公告","发布日期","商品/物项","两用物项管制编码","参考海关商品编号/税则号列","状态","官方原文"];
-  const rows=[head,...announcementItems.map(item=>[item.notice,item.date,item.item,item.controlCode,item.hsCode,item.statusText,item.source])];
+  const head=["公告","发布日期","管制类型","商品/物项","两用物项管制编码","参考海关商品编号/税则号列","状态","官方原文"];
+  const rows=[head,...announcementItems.map(item=>[item.notice,item.date,controlTypeMeta[item.controlType]?.label||item.controlType,item.item,item.controlCode,item.hsCode,item.statusText,item.source])];
   const content="\ufeff"+rows.map(row=>row.map(value=>`"${String(value).replaceAll('"','""')}"`).join(",")).join("\n");
   return {
     id:"generated-announcement-csv",name:"公告商品与税号清单.csv",extension:"CSV",type:"spreadsheet",typeName:"表格",
@@ -3242,7 +3291,7 @@ function downloadLibraryFile(id){
 
 function openDetail(id){
   const p=policies.find(x=>x.id===id); if(!p)return;
-  document.getElementById("dialogContent").innerHTML=`<div class="dialog-body"><span class="dialog-symbol">${p.symbol}</span><span class="status-pill ${p.status}">${p.statusText}</span><h2>${p.name}</h2><p class="dialog-sub">${p.date} · ${p.type}${p.pauseDate?` · 暂停公告日期 ${p.pauseDate}`:""}</p><section class="detail-block"><h3>CONTROL SCOPE / 管制范围</h3><p>${p.scope}</p></section><section class="detail-block"><h3>CONTROL METHOD / 管制手段</h3><p>${p.method}</p></section><section class="detail-block"><h3>PRIMARY SOURCE / 政策来源</h3><p>${p.source}</p><div class="source-actions"><a class="source-link" href="${p.url}" target="_blank" rel="noreferrer">打开原公告 ↗</a>${p.pauseUrl?`<a class="source-link pause" href="${p.pauseUrl}" target="_blank" rel="noreferrer">打开第70号暂停公告 ↗</a>`:""}</div></section></div>`;
+  document.getElementById("dialogContent").innerHTML=`<div class="dialog-body"><span class="dialog-symbol">${p.symbol}</span><span class="status-pill ${p.status}">${p.statusText}</span>${controlTypeBadge(p.type==="技术"?"technology_control":"item_control")}<h2>${p.name}</h2><p class="dialog-sub">${p.date} · ${p.type}${p.pauseDate?` · 暂停公告日期 ${p.pauseDate}`:""}</p><section class="detail-block"><h3>CONTROL SCOPE / 管制范围</h3><p>${p.scope}</p></section><section class="detail-block"><h3>CONTROL METHOD / 管制手段</h3><p>${p.method}</p></section><section class="detail-block"><h3>PRIMARY SOURCE / 政策来源</h3><p>${p.source}</p><div class="source-actions"><a class="source-link" href="${p.url}" target="_blank" rel="noreferrer">打开原公告 ↗</a>${p.pauseUrl?`<a class="source-link pause" href="${p.pauseUrl}" target="_blank" rel="noreferrer">打开第70号暂停公告 ↗</a>`:""}</div></section></div>`;
   dialog.showModal();
 }
 

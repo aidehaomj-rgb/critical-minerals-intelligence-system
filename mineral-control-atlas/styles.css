@@ -88,6 +88,15 @@ tbody tr:last-child td{border-bottom:0}
 .announcement-card h3{font-size:calc(13px*var(--font-scale));font-weight:530;margin:0}
 .announcement-card .control-code{font-size:calc(9px*var(--font-scale))}
 .announcement-card a{color:var(--cyan);font-size:calc(10px*var(--font-scale));margin-top:auto}
+.control-type-badge{display:inline-flex;align-items:center;white-space:nowrap;padding:4px 9px;border:1px solid rgba(120,160,195,.28);border-radius:999px;background:rgba(120,160,195,.09);color:#a9c5dc;font-size:calc(9px*var(--font-scale));font-weight:600;letter-spacing:.02em}
+.control-type-badge.unreliable{border-color:rgba(255,91,113,.42);background:rgba(255,77,103,.12);color:#ff9aab}
+.control-type-badge.controlled,.control-type-badge.entity{border-color:rgba(255,168,66,.42);background:rgba(255,158,43,.12);color:#ffc178}
+.control-type-badge.watch{border-color:rgba(250,211,76,.4);background:rgba(250,211,76,.1);color:#f8dc78}
+.control-type-badge.item{border-color:rgba(72,190,225,.4);background:rgba(54,145,197,.12);color:#85d8f2}
+.control-type-badge.technology{border-color:rgba(171,119,255,.42);background:rgba(145,88,234,.12);color:#c9a9ff}
+.control-type-badge.adjustment{border-color:rgba(139,164,184,.4);background:rgba(139,164,184,.1);color:#b8c8d5}
+.entity-table{width:100%;border-collapse:collapse}.entity-table th,.entity-table td{padding:12px 10px;border-bottom:1px solid var(--line-soft);text-align:left;vertical-align:top}.entity-table th{color:var(--muted-2);font-size:calc(9px*var(--font-scale));font-weight:600}.entity-table td{font-size:calc(10px*var(--font-scale))}.entity-table td strong,.entity-table td small{display:block}.entity-table td small{max-width:380px;margin-top:4px;color:var(--muted);line-height:1.5}.entity-toolbar{grid-template-columns:minmax(260px,1fr) auto auto}
+@media(max-width:900px){.entity-toolbar{grid-template-columns:1fr}.entity-table{min-width:900px}#entityTableWrap{overflow-x:auto}}
 
 /* === Filter & Search === */
 .filter-group{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
